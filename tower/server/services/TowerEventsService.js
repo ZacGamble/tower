@@ -12,6 +12,10 @@ class TowerEventsService {
         }
         return found;
     }
+
+    async getTicketsByEvent(eventId) {
+        return await dbContext.Tickets.find({eventId})
+    }
    async create(body) {
         const created = await dbContext.TowerEvents.create(body)
         await created.populate('creator');

@@ -1,4 +1,5 @@
 import mongoose from "mongoose";
+import { TowerEventSchema } from "./TowerEvent";
 
 const Schema = mongoose.Schema
 
@@ -13,9 +14,10 @@ export const TicketSchema = new Schema(
     { timestamps: true, toJSON: { virtuals: true } }
 );
 
-TicketSchema.virtual('creator', {
-    localField: 'creatorId',
+TicketSchema.virtual('account', {
+    localField: 'accountId',
     foreignField: '_id',
     ref: 'Account',
     justOne: true
 })
+
