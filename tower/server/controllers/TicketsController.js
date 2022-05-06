@@ -20,9 +20,9 @@ export class TicketsController extends BaseController {
     }
     async create(req, res, next) {
         try {
-            req.body.creatorId = req.userInfo.id
+            req.body.accountId = req.userInfo.id
             req.body.eventId = req.params.eventId
-            const newTicket = await ticketsService.create(req.body.eventId)
+            const newTicket = await ticketsService.create(req.body)
             return res.send(newTicket)
         } catch (error) {
             next(error)
