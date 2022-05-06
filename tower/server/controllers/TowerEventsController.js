@@ -7,16 +7,16 @@ export class TowerEventsController extends BaseController {
     constructor(){
         super('api/events')
         this.router
-        .use(Auth0Provider.getAuthorizedUserInfo)
         .get('', this.getAll)
         .get('/:eventId', this.getById)
+        .use(Auth0Provider.getAuthorizedUserInfo)
         .post('', this.create)
         .put('/:eventId', this.edit)
         .delete('/eventId', this.remove)
     }
    async getAll(req, res, next) {
         try {
-            const towerEvents = await towerEventsService.getAll(req.userInfo.id)
+            const towerEvents = await towerEventsService.getAll()
             return res.send(towerEvents)
         } catch (error) {
             next(error)
@@ -24,7 +24,7 @@ export class TowerEventsController extends BaseController {
     }
    async getById(req, res, next) {
         try {
-            const foundTowerEvent = await towerEventsService.getById(req.params.id)
+            const foundTowerEvent = await towerEventsService.getById(req.params.eventId)
             return res.send(foundTowerEvent)
         } catch (error) {
             next(error)
@@ -32,7 +32,7 @@ export class TowerEventsController extends BaseController {
     }
    async create(req, res, next) {
         try {
-            req.body.creatorId = req.userInfo
+            req.body.creatorId = req.userInfo.id
             const towerEvent = await towerEventsService.create(req.body)
             return res.send(towerEvent)
         } catch (error) {
@@ -41,7 +41,7 @@ export class TowerEventsController extends BaseController {
     }
    async edit(req, res, next) {
         try {
-            req.body.id = req.params.id
+            req.body.id = req.params.eventId
             req.body.creatorId = req.userInfo.id
             const towerEvent = await towerEventsService.edit(req.body)
             return res.send(towerEvent)
@@ -49,9 +49,10 @@ export class TowerEventsController extends BaseController {
             next(error)
         }
     }
+    // does this need a separate put route for the cancel feature?
    async remove(req, res, next) {
         try {
-            const removedTowerEvent = await towerEventsService.remove(req.params.id, req.userInfo.id)
+            const removedTowerEvent = await towerEventsService.remove(req.params.eventId, req.userInfo.id)
             return res.send(removedTowerEvent)
         } catch (error) {
             next(error)

@@ -1,8 +1,8 @@
 import { dbContext } from "../db/DbContext"
 
 class TicketsService {
-  async getTicketsByEvent(ticketId) {
-        return await dbContext.Tickets.find({ticketId})
+  async getTicketsByEvent(eventId) {
+        return await dbContext.Tickets.find({eventId})
     }
   async create(body) {
         const createdTicket = await dbContext.Tickets.create(body)
@@ -11,6 +11,7 @@ class TicketsService {
     }
   async remove(ticketId, id) {
         const removed = await dbContext.Tickets.deleteOne(ticketId)
+        return removed
     }
 
 }

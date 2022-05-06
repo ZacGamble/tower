@@ -2,8 +2,8 @@ import { dbContext } from "../db/DbContext"
 import { BadRequest, Forbidden } from "../utils/Errors";
 
 class TowerEventsService {
-   async getAll(creatorId) {
-        return await dbContext.TowerEvents.find({creatorId}).populate('creator');
+   async getAll() {
+        return await dbContext.TowerEvents.find().populate('creator');
     }
    async getById(id) {
         const found = await dbContext.TowerEvents.findById(id).populate('creator');
@@ -18,14 +18,30 @@ class TowerEventsService {
         return created;
     }
    async edit(body) {
-        
+        const original = await this.getById(body.id);
+        if(original.creatorId.toString() !== body.creatorId) {
+            throw new Forbidden('You do not have permission to edit this.')
+        }
+        if(original.isCanceled == true) {
+            throw new BadRequest('This event is no longer available')
+        }
+        original.name = body.name || original.name
+        original.description = body.description || original.description
+        original.coverImg = body.coverImg || original.coverImg
+        original.location = body.location || original.location
+        original.capacity = body.capacity || original.capacity
+        original.startDate = body.startDate || original.startDate
+        original.type = body.type || original.type
+        await original.save()
+        return original
     }
    async remove(eventId, userId) {
         const removedEvent = await this.getById(eventId);
         if(removedEvent.creatorId.toString() !== userId) {
             throw new Forbidden('You do not have permissions to do this')
         }
-        await removedEvent.remove()
+        removedEvent.isCanceled = true
+        await removedEvent.save()
         return removedEvent;
     }
 
