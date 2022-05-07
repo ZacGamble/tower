@@ -10,11 +10,11 @@
     </div>
     <div class="row">
      <div class="d-flex justify-content-evenly bg-secondary fw-bold align-items-center pt-2">
-       <p class="selectable pop" title="view all">All Events</p>
-       <p class="selectable pop" title="filter for concerts">Concerts</p>
-       <p class="selectable pop" title="filter for conventions">Conventions</p>
-       <p class="selectable pop" title="filter for digital">Digital</p>
-       <p class="selectable pop" title="filter for sports">Sports</p>
+       <p class="selectable pop" title="view all" @click="getTowerEvents()" >All Events</p>
+       <p class="selectable pop" title="filter for concerts" @click="getTowerConcerts()" >Concerts</p>
+       <p class="selectable pop" title="filter for conventions" @click="getTowerConventions()">Conventions</p>
+       <p class="selectable pop" title="filter for digital" @click="getTowerDigital()">Digital</p>
+       <p class="selectable pop" title="filter for sports" @click="getTowerSports()">Sports</p>
      </div>
     </div>
     <div class="row">
@@ -62,9 +62,56 @@ export default {
     //     Pop.toast(error.message, 'error')
     //   }
     // })
+
     return {
+// return computed
+      towerEvents : computed(() => AppState.activeEvents),
+// methods
+        async getTowerEvents(){
+      try {
+          await towerEventsService.getTowerEvents()
+        } catch (error) {
+          logger.error(error)
+          Pop.toast(error.message, 'error')
+        }
+      },
+
+      async getTowerConcerts(){
+        try {
+          await towerEventsService.getTowerConcerts()
+          
+        } catch (error) {
+          logger.error(error)
+          Pop.toast(error.message, 'error')
+        }
+      },
+
+      async getTowerConventions(){
+        try {
+          await towerEventsService.getTowerConventions()
+        } catch (error) {
+          logger.error(error)
+          Pop.toast(error.message, 'error')
+        }
+      },
       
-      towerEvents : computed(() => AppState.towerEvents)
+      async getTowerDigital(){
+        try {
+          await towerEventsService.getTowerDigital()
+        } catch (error) {
+          logger.error(error)
+          Pop.toast(error.message, 'error')
+        }
+      },
+
+      async getTowerSports(){
+        try {
+          await towerEventsService.getTowerSports()
+        } catch (error) {
+          logger.error(error)
+          Pop.toast(error.message, 'error')
+        }
+      }
     }
   }
 

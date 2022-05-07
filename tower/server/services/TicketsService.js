@@ -9,7 +9,7 @@ class TicketsService {
         return createdTicket
     }
   async remove(ticketId, id) {
-        const removed = await dbContext.Tickets.deleteOne(ticketId)
+        const removed = await dbContext.Tickets.findByIdAndDelete(ticketId)
         return removed
     }
 

@@ -6,8 +6,31 @@ class TowerEventsService {
 
     async getTowerEvents(){
         const res = await api.get('api/events')
-        AppState.towerEvents = res.data
-        logger.log('EventsService >', res.data)
+        AppState.activeEvents = res.data
+        // logger.log('EventsService >', res.data)
     }
+    async getTowerConcerts(){
+        const res = await api.get('api/events')
+        const concerts =  res.data.filter(r => r.type === 'concert')
+        AppState.activeEvents = concerts
+        // logger.log('eventsService > get Concerts>' , concerts)
+    }
+    async getTowerConventions(){
+        const res = await api.get('api/events')
+        const conventions =  res.data.filter(r => r.type === 'convention')
+        AppState.activeEvents = conventions
+        // logger.log('eventsService > get conventions>' , conventions)
+    }
+    async getTowerDigital(){
+        const res = await api.get('api/events')
+        const digital =  res.data.filter(r => r.type === 'digital')
+        AppState.activeEvents = digital
+    }
+    async getTowerSports(){
+        const res = await api.get('api/events')
+        const sports =  res.data.filter(r => r.type === 'sport')
+        AppState.activeEvents = sports
+    }
+    
 }
 export const towerEventsService = new TowerEventsService()

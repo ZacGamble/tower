@@ -10,13 +10,14 @@
                     <h4>{{activeEvent?.name}}</h4>
                     <h6>On {{activeEvent?.startDate.substring(5, 10)}}</h6>
                 </div>
-                <div class="d-flex">
+                <div class="d-flex justify-content-between">
                     <h6>{{activeEvent?.location}}</h6>
+                    
                 </div>
                 <p>{{activeEvent?.description}}</p>
                 <div class="d-flex justify-content-between my-4">
                     <span><b class="text-danger">{{activeEvent?.capacity}}</b> spots left</span>
-                    <span><button class="btn btn-warning">Attend <i class="mdi mdi-account"></i></button></span>
+                    <span><button class="btn btn-warning">Attend {{activeEvent?.type}} <i class="mdi mdi-account"></i></button></span>
                 </div>
             </div>
         </div>
@@ -48,13 +49,13 @@
 <script>
 import { computed } from '@vue/reactivity'
 import { AppState } from '../AppState'
-import { watchEffect } from '@vue/runtime-core'
+import { onMounted, watchEffect } from '@vue/runtime-core'
 export default {
     setup(){
-        watchEffect(()=> {
+        // onMounted(()=> {
+        //     activeEvent
             
-            
-            })
+        //     })
         return {
             activeEvent: computed(()=> AppState.activeEvent),
         }
