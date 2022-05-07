@@ -3,19 +3,19 @@
         <div class="row bg-light text-dark">
             <!-- Details -->
             <div class="col-md-4 p-4">
-             <img :src="activeEvent.coverImg" alt="cover image" class="img-fluid">
+             <img :src="activeEvent?.coverImg" alt="cover image" class="img-fluid">
             </div>
             <div class="col-md-8 p-4">
                 <div class="d-flex justify-content-between">
-                    <h4>{{activeEvent.name}}</h4>
-                    <h6>On {{activeEvent.startDate.substring(5, 10)}}</h6>
+                    <h4>{{activeEvent?.name}}</h4>
+                    <h6>On {{activeEvent?.startDate.substring(5, 10)}}</h6>
                 </div>
                 <div class="d-flex">
-                    <h6>{{activeEvent.location}}</h6>
+                    <h6>{{activeEvent?.location}}</h6>
                 </div>
-                <p>{{activeEvent.description}}</p>
+                <p>{{activeEvent?.description}}</p>
                 <div class="d-flex justify-content-between my-4">
-                    <span><b class="text-danger">{{activeEvent.capacity}}</b> spots left</span>
+                    <span><b class="text-danger">{{activeEvent?.capacity}}</b> spots left</span>
                     <span><button class="btn btn-warning">Attend <i class="mdi mdi-account"></i></button></span>
                 </div>
             </div>
@@ -48,11 +48,15 @@
 <script>
 import { computed } from '@vue/reactivity'
 import { AppState } from '../AppState'
+import { watchEffect } from '@vue/runtime-core'
 export default {
     setup(){
-        return {
-            activeEvent: computed(()=> AppState.activeEvent)
+        watchEffect(()=> {
             
+            
+            })
+        return {
+            activeEvent: computed(()=> AppState.activeEvent),
         }
     }
 }
