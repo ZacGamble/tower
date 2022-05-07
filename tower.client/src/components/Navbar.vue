@@ -79,6 +79,7 @@ import { towerEventsService } from '../services/TowerEventsService';
 import { logger } from '../utils/Logger';
 import Pop from '../utils/Pop';
 import { Modal } from 'bootstrap';
+import { AppState } from '../AppState';
 export default {
  
   setup() { 
@@ -103,8 +104,8 @@ export default {
         try {
         const newEvent = await towerEventsService.createTowerEvent(editable.value) 
          Modal.getOrCreateInstance(document.getElementById("eventModal")).hide()
-         Pop.toast('Event created successfully')
-         router.push({name: 'EventDetailsPage', params: {eventId: newEvent.eventId}})
+         Pop.toast('Event created successfully', 'success')
+         router.push({name: 'EventDetailsPage', params: {eventId: AppState.activeEvent.id}})
         } catch (error) {
           logger.error(error)
           Pop.toast(error.message, 'error')
