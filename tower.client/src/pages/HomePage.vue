@@ -8,7 +8,7 @@
     </div>
     <div class="row">
       <!-- Dynamically draw events here -->
-    <TowerEvent v-for="t in towerEvents" :key="t.id" towerEvent="t"/>
+    <TowerEvent v-for="t in towerEvents" :key="t.id" :towerEvent="t"/>
     </div>
   </div>
 </template>

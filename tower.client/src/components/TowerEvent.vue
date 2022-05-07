@@ -1,10 +1,10 @@
 <template>
      <div class="col-md-3 my-3">
         <div class="border border-dark">
-        <h4></h4>
-        <p>A description</p>
-        <p>date of the event</p>
-        <i>(capacity) How many spots left </i>
+        <h4>{{towerEvent.name}}</h4>
+        <p>{{towerEvent.description}}</p>
+        <p>Booked for: {{towerEvent.startDate.substring(0, 10)}}</p>
+        <i>Remaining tickets: {{towerEvent.capacity}} </i>
         </div>
       </div>
 </template>
