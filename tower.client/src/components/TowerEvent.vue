@@ -7,12 +7,11 @@
         <i> {{towerEvent.capacity}} tickets remaining </i>
         <hr>
         </div>
-        <p class="border border-light p-3">{{towerEvent.description}}</p>
       </div>
 </template>
 
 <script>
-import { useRouter } from 'vue-router'
+import { useRoute, useRouter } from 'vue-router'
 import { AppState } from '../AppState'
 import { logger } from '../utils/Logger'
 export default {
@@ -25,13 +24,14 @@ export default {
 
 setup(props){
     const router = useRouter()
+    const route = useRoute()
 
 
 return {
 
     openEventPage() {
+        AppState.activeEvent = props.towerEvent
         router.push({name: 'EventDetailsPage', params: {eventId: props.towerEvent.id}})
-        AppState.activeEvent = props.towerEvent.eventId
         logger.log('TowerEvent.vue > ', AppState.activeEvent)
 
             }
