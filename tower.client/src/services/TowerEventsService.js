@@ -3,7 +3,12 @@ import { logger } from "../utils/Logger"
 import { api } from "./AxiosService"
 
 class TowerEventsService {
-
+    async getActiveEvent(routeId){
+        const res = await api.get('api/events/' + routeId)
+        AppState.activeEvent = res.data
+        // logger.log('get active > tower Events service', active)
+    }
+  
     async getTowerEvents(){
         const res = await api.get('api/events')
         AppState.activeEvents = res.data

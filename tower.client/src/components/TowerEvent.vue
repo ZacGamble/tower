@@ -1,6 +1,6 @@
 <template>
      <div class="col-md-4 my-3 p-3">
-        <div @click="openEventPage()" class="border border-dark selectable mb-4" :title="'open details for ' + towerEvent.name">
+        <div @click.stop="openEventPage('EventDetailsPage', {eventId: towerEvent.id})" class="border border-dark selectable mb-4" :title="'open details for ' + towerEvent.name">
         <img class="img-fluid background my-3 rounded" :src="towerEvent.coverImg" />
         <h6>{{towerEvent.name}}</h6>
         <p>Booked for: {{towerEvent.startDate.substring(0, 10)}}</p>
@@ -11,6 +11,7 @@
 </template>
 
 <script>
+import { watchEffect } from '@vue/runtime-core'
 import { useRoute, useRouter } from 'vue-router'
 import { AppState } from '../AppState'
 import { logger } from '../utils/Logger'
@@ -25,13 +26,15 @@ export default {
 setup(props){
     const router = useRouter()
     const route = useRoute()
-
+    watchEffect(()=> {
+        AppState.activeEvent = props.towerEvent
+    })
 
 return {
 
-    openEventPage() {
+    openEventPage(name, params) {
         AppState.activeEvent = props.towerEvent
-        router.push({name: 'EventDetailsPage', params: {eventId: props.towerEvent.id}})
+        router.push({name, params})
         logger.log('TowerEvent.vue > ', AppState.activeEvent)
 
             }

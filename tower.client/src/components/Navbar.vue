@@ -28,6 +28,7 @@
           </router-link> -->
         </li>
       </ul>
+      <button class="btn btn-success me-5 my-3" @click="createEvent()">Create Event</button>
       <!-- LOGIN COMPONENT HERE -->
       <Login />
     </div>

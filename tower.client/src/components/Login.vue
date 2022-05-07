@@ -9,6 +9,7 @@
     </button>
 
     <div class="dropdown my-2 my-lg-0" v-else>
+          
       <div
         class="dropdown-toggle selectable"
         data-bs-toggle="dropdown"
@@ -34,6 +35,7 @@
             Manage Account
           </div>
         </router-link>
+        
         <div
           class="list-group-item list-group-item-action hoverable text-danger"
           @click="logout"

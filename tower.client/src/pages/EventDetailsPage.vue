@@ -50,14 +50,39 @@
 import { computed } from '@vue/reactivity'
 import { AppState } from '../AppState'
 import { onMounted, watchEffect } from '@vue/runtime-core'
-export default {
+import { towerEventsService } from '../services/TowerEventsService'
+import Pop from '../utils/Pop'
+import { logger } from '../utils/Logger'
+import { useRoute } from 'vue-router'
+export default {  
+
     setup(){
-        // onMounted(()=> {
-        //     activeEvent
-            
-        //     })
+
+        const route = useRoute()
+        onMounted(async()=> {
+            try {
+                // logger.log(route.params.eventId)
+                AppState.activeEvent = null;
+           await towerEventsService.getActiveEvent(route.params.eventId)
+            } catch (error) {
+              logger.error(error)
+              Pop.toast(error.message, 'error')
+            }
+        
+            })
+
         return {
             activeEvent: computed(()=> AppState.activeEvent),
+
+                async getActiveEvent(){
+                try {
+                await towerEventsService.getActiveEvent(route.params.id)
+                } catch (error) {
+                  logger.error(error)
+                  Pop.toast(error.message, 'error')
+                }
+            },
+          
         }
     }
 }
