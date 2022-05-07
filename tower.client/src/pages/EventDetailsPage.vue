@@ -15,7 +15,7 @@
                 </div>
                 <p>{{activeEvent.description}}</p>
                 <div class="d-flex justify-content-between my-4">
-                    <span><b class="text-warning">{{activeEvent.capacity}}</b> spots left</span>
+                    <span><b class="text-danger">{{activeEvent.capacity}}</b> spots left</span>
                     <span><button class="btn btn-warning">Attend <i class="mdi mdi-account"></i></button></span>
                 </div>
             </div>
@@ -52,6 +52,7 @@ export default {
     setup(){
         return {
             activeEvent: computed(()=> AppState.activeEvent)
+            
         }
     }
 }

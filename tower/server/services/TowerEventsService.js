@@ -26,9 +26,9 @@ class TowerEventsService {
         await created.populate('creator');
         return created;
     }
-   async edit(body) {
+   async edit(body, userId) {
         const original = await this.getById(body.id);
-        if(original.creatorId.toString() !== body.creatorId) {
+        if(original.creatorId.toString() !== userId) {
             throw new Forbidden('You do not have permission to edit this.')
         }
         if(original.isCanceled == true) {
