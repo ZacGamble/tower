@@ -2,6 +2,7 @@ import { dbContext } from "../db/DbContext"
 import { BadRequest, Forbidden } from "../utils/Errors";
 
 class TowerEventsService {
+ 
 
    async getAll() {
         return await dbContext.TowerEvents.find().populate('creator');
@@ -16,6 +17,9 @@ class TowerEventsService {
 
     async getTicketsByEvent(eventId) {
         return await dbContext.Tickets.find({eventId}).populate('account')
+    }  
+    async getEventComments() {
+        return await dbContext.TowerEvents.find().populate('creator')
     }
    async create(body) {
         const created = await dbContext.TowerEvents.create(body)
