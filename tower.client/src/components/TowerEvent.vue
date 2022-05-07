@@ -36,7 +36,7 @@ return {
     openEventPage(name, params) {
         AppState.activeEvent = props.towerEvent
         router.push({name, params})
-        // logger.log('TowerEvent.vue > ', AppState.activeEvent)
+        logger.log('TowerEvent.vue > Appstate.activeEvent(page) ', AppState.activeEvent)
 
             }
         }

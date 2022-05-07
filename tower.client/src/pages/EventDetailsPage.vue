@@ -30,16 +30,16 @@
         <div class="row">
             <!-- Comments -->
             <div class="col-md-12 px-5 bg-secondary">
-                <small>What are people saying</small>
-                <form class="d-flex flex-column">
+                      <small>What are people saying</small>
+                <form class="d-flex flex-column border border-dark p-3 rounded">
                     <div class="d-flex justify-content-end"><small>Join the conversation</small></div>
-                      <textarea name="comment-field" id="comment-field" title="leave a comment" placeholder="Tell the people..."></textarea>
+                      <textarea class="bg-grey" name="comment-field" id="comment-field" title="leave a comment" placeholder="Tell the people..."></textarea>
                       <div class="d-flex justify-content-end">
-                        <button class="btn btn-success" type="submit" title="submit comment">post comment</button>
+                        <button class="btn btn-success mt-4" type="submit" title="submit comment">post comment</button>
                       </div>
-                 
                 </form>
                 <!-- Comment component here -->
+                <Comment/>
             </div>
         </div>
     </div>
