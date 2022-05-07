@@ -1,10 +1,21 @@
 <template>
   <div class="container">
-    <div class="row">
-      A headline card and text
+    <div class="row background text-light fw-bold p-3">
+      <!-- Filter homepage component here? -->
+      A headline card and text <br>
+      Lorem, ipsum dolor sit amet consectetur adipisicing elit. 
+      Adipisci, reiciendis.  <br>
+      Obcaecati reprehenderit esse perspiciatis praesentium modi alias ratione. <br>
+      Ducimus dolorum minus nam autem atque soluta rerum ex eos perspiciatis est!
     </div>
     <div class="row">
-      Some filtering options
+     <div class="d-flex justify-content-evenly bg-secondary fw-bold align-items-center pt-2">
+       <p class="selectable pop" title="view all">All Events</p>
+       <p class="selectable pop" title="filter for concerts">Concerts</p>
+       <p class="selectable pop" title="filter for conventions">Conventions</p>
+       <p class="selectable pop" title="filter for digital">Digital</p>
+       <p class="selectable pop" title="filter for sports">Sports</p>
+     </div>
     </div>
     <div class="row">
       <!-- Dynamically draw events here -->
@@ -61,5 +72,12 @@ export default {
 </script>
 
 <style>
+.background{
+  background-image: url(https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSsabwBkqqKoScQIEGo5S1CzUm3GxJS4XRIiA&usqp=CAU);
+  background-size: cover;
+}
 
+.pop:hover{
+  transform: scale(1.03);
+}
 </style>

@@ -9,12 +9,20 @@ const routes = [
   {
     path: '/',
     name: 'Home',
-    component: loadPage('HomePage')
+    component: loadPage('HomePage'),
+    beforeEnter: authGuard
+  },
+  {
+    path: '/api/events/:eventId',
+    name: 'EventDetailsPage',
+    component: loadPage('EventDetailsPage'),
+    beforeEnter: authGuard
   },
   {
     path: '/about',
     name: 'About',
-    component: loadPage('AboutPage')
+    component: loadPage('AboutPage'),
+    beforeEnter: authGuard
   },
   {
     path: '/account',
