@@ -35,9 +35,26 @@
 </template>
 
 <script>
+import { useRouter } from 'vue-router';
+import { towerEventsService } from '../services/TowerEventsService';
+import { logger } from '../utils/Logger';
+import Pop from '../utils/Pop';
 export default {
+  
+  
   setup() {
-    return {};
+    const router = useRouter();
+    return {
+     async navigateTo(){
+       try {
+         router.push({name: 'Home'})
+         await towerEventsService.getTowerEvents()
+       } catch (error) {
+         logger.error(error)
+         Pop.toast(error.message, 'error')
+       }
+      }
+    };
   },
 };
 </script>
