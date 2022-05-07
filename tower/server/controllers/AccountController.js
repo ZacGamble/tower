@@ -12,6 +12,7 @@ export class AccountController extends BaseController {
   }
   async getMyTickets(req, res, next) {
     try {
+
       const tickets = await accountService.getMyTickets()
       return res.send(tickets)
     } catch (error) {

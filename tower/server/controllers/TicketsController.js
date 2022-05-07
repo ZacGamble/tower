@@ -6,8 +6,8 @@ export class TicketsController extends BaseController {
         super('api/tickets')
         this.router
         .use(Auth0Provider.getAuthorizedUserInfo)
-        .post('/tickets', this.create)
-        .delete('/tickets/:ticketId', this.removeTicket)
+        .post('', this.create)
+        .delete('/:ticketId', this.removeTicket)
     }
   
     async create(req, res, next) {

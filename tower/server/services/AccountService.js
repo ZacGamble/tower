@@ -44,7 +44,7 @@ function sanitizeBody(body) {
 
 class AccountService {
  async getMyTickets() {
-    return await dbContext.TowerEvents.find().populate('creator')
+    return await dbContext.TowerEvents.find()
   }
   /**
    * Returns a user account from the Auth0 user object
