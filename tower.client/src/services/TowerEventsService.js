@@ -3,15 +3,21 @@ import { logger } from "../utils/Logger"
 import { api } from "./AxiosService"
 
 class TowerEventsService {
+
+    async createTowerEvent(value){
+        const res = await api.post('api/events', value)
+        AppState.activeEvent = res.data
+        logger.log('towerEvents Service> create', res.data)
+    }
     async getActiveEvent(routeId){
         const res = await api.get('api/events/' + routeId)
         AppState.activeEvent = res.data
         // logger.log('get active > tower Events service', active)
     }
-  
     async getTowerEvents(){
         const res = await api.get('api/events')
         AppState.activeEvents = res.data
+        AppState.activeEvents.reverse()
         // logger.log('EventsService >', res.data)
     }
     async getTowerConcerts(){
