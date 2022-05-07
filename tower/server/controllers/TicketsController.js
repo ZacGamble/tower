@@ -1,5 +1,7 @@
 import { Auth0Provider } from "@bcwdev/auth0provider";
+
 import { ticketsService } from "../services/TicketsService";
+import { towerEventsService } from "../services/TowerEventsService";
 import BaseController from "../utils/BaseController";
 export class TicketsController extends BaseController {
     constructor(){
@@ -14,6 +16,7 @@ export class TicketsController extends BaseController {
         try {
             req.body.accountId = req.userInfo.id
             const newTicket = await ticketsService.create(req.body)
+            // await towerEventsService.editCapacity()
             return res.send(newTicket)
         } catch (error) {
             next(error)

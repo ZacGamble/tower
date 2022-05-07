@@ -2,6 +2,7 @@ import { dbContext } from "../db/DbContext"
 import { BadRequest, Forbidden } from "../utils/Errors";
 
 class TowerEventsService {
+
    async getAll() {
         return await dbContext.TowerEvents.find().populate('creator');
     }
@@ -38,6 +39,9 @@ class TowerEventsService {
         original.type = body.type || original.type
         await original.save()
         return original
+    }
+    editCapacity(towerEvent) {
+        
     }
    async remove(eventId, userId) {
         const removedEvent = await this.getById(eventId);
