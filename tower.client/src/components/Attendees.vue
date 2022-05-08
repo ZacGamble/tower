@@ -1,7 +1,5 @@
 <template>
-    <div class="component p-1">
-       <img class="img-clamp" :src="attendee?.account.picture" alt="attendee photo" :title="attendee?.account.name"> 
-    </div>
+       <img class="img-clamp ms-1 my-1" :src="attendee?.account.picture" alt="attendee photo" :title="attendee?.account.name"> 
 </template>
 
 

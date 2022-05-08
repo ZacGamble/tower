@@ -1,3 +1,4 @@
+import { looseEqual } from "@vue/shared"
 import { useRoute } from "vue-router"
 import { AppState } from "../AppState"
 import { logger } from "../utils/Logger"
@@ -10,6 +11,11 @@ class TowerEventsService {
         AppState.activeEvent = res.data
         logger.log('towerEvents Service> create', res.data)
     }
+    async cancelEvent(eventId){
+        const res = await api.delete('api/events/' + eventId)
+        AppState.activeEvent = res.data
+        logger.log('canceled event > towerEvent service >', res.data)
+    }
     async getActiveEvent(routeId){
         const res = await api.get('api/events/' + routeId)
         AppState.activeEvent = res.data
@@ -21,6 +27,10 @@ class TowerEventsService {
         AppState.activeEvents.reverse()
         // logger.log('EventsService >', res.data)
     }
+    // async getEventsByTicket(){
+    //    const myTicketEvents = AppState.myTickets.filter(t => t.eventId)
+    //    logger.log(myTicketEvents)
+    // }
 
     async getCommentsByEvent(eventId){
         AppState.activeComments = []

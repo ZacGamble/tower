@@ -4,6 +4,7 @@
             <!-- Details -->
             <div class="col-md-4 p-4" :class="activeEvent?.capacity <= 0 || activeEvent?.isCanceled ? 'bg-danger' : 'bg-light'">
              <img :src="activeEvent?.coverImg" alt="cover image" class="img-fluid">
+                    <button @click="cancelEvent()" type="button" title="cancel event" v-show="account?.id == activeEvent?.creatorId && activeEvent?.isCanceled == false" class="btn btn-danger mt-3">Cancel event?</button>
             <span class="fs-1" v-show="activeEvent?.capacity <= 0 || activeEvent?.isCanceled">EVENT NO LONGER AVAILABLE</span>
             </div>
             <div class="col-md-8 p-4">
@@ -86,6 +87,7 @@ export default {
             activeEvent: computed(()=> AppState.activeEvent),
             activeComments: computed(()=> AppState.activeComments),
             activeTickets: computed(()=> AppState.activeTickets),
+            account: computed(()=> AppState.account),
 
             async createTicket(){
                 try {
@@ -108,6 +110,18 @@ export default {
 
                 } catch (error) {
                   logger.error(error)
+                  Pop.toast(error.message, 'error')
+                }
+            },
+
+            async cancelEvent(){
+                try {
+                    if (await Pop.confirm()) {
+                        await towerEventsService.cancelEvent(route.params.eventId)
+                        Pop.toast('event canceled')  
+                    }
+                } catch (error) {
+                    logger.error(error)
                   Pop.toast(error.message, 'error')
                 }
             }

@@ -11,6 +11,7 @@
     <div class="col-md-6">
       <h5>Upcoming events</h5>
       <!-- inject my upcoming events/ events I hold tickets for -->
+      <Ticket/>
       <div>{{myTickets}}</div>
     </div>
   </div>
@@ -22,18 +23,22 @@ import { computed, onMounted } from 'vue'
 import { AppState } from '../AppState'
 import { towerEventsService } from '../services/TowerEventsService'
 import { accountService } from '../services/AccountService'
+import Ticket from '../components/Ticket.vue'
 export default {
+  components: { Ticket },
   name: 'Account',
   setup() {
     onMounted(async()=> {
       await towerEventsService.getMyEvents(AppState.account)
       await accountService.getAccount()
       await accountService.getMyTickets()
+      await towerEventsService.getUpcomingEvents()
     })
     return {
       account: computed(() => AppState.account),
       myEvents: computed(()=> AppState.myEvents),
-      myTickets: computed(()=> AppState.myTickets)
+      myTickets: computed(()=> AppState.myTickets),
+      
       
     }
   }
