@@ -5,7 +5,7 @@
         <div class="d-flex justify-content-between">
 
       <h5 class="p-2">{{account.name}}</h5>  
-      <i v-show="comment.creatorId == account.id" class="mdi mdi-delete fs-2 action" title="delete comment" @click="deleteComment(comment.id)"></i>
+      <i v-show="comment.creatorId == account.id" class="mdi mdi-delete fs-2 action" title="delete comment" @click="deleteComment(comment.id, comment.creatorId)"></i>
         </div>
         <p>{{comment.body}}</p>
     </div>
@@ -16,7 +16,7 @@
 <script>
 import { computed } from '@vue/reactivity'
 import { AppState } from '../AppState'
-import { onMounted, watchEffect } from '@vue/runtime-core'
+import { Comment, onMounted, watchEffect } from '@vue/runtime-core'
 import { towerEventsService } from '../services/TowerEventsService'
 import { logger } from '../utils/Logger'
 import Pop from '../utils/Pop'
@@ -41,10 +41,10 @@ export default {
             activeEvent: computed(()=> AppState.activeEvent),
             activeComments: computed(()=> AppState.activeComments),
 
-            async deleteComment(id){
+            async deleteComment(commentId, creatorId){
                 try {
                     if (await Pop.confirm()) {
-                        await commentsService.deleteComment(id)
+                        await commentsService.deleteComment(commentId, creatorId)
                         Pop.toast('Comment deleted!', 'success')
                     }
 

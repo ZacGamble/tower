@@ -11,6 +11,7 @@ class AccountService {
       logger.error(err)
     }
   }
+  
 }
 
 export const accountService = new AccountService()

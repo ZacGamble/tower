@@ -7,8 +7,17 @@ export class CommentsController extends BaseController {
         super('api/comments')
         this.router
         .use(Auth0Provider.getAuthorizedUserInfo)
+        .get('/:commentId', this.getCommentById)
         .post('', this.createComment)
         .delete('/:commentId', this.removeComment)
+    }
+    async getCommentById(req, res, next) {
+       try {
+           const comment = await commentsService.getCommentById(req.params.id)
+           return res.send(comment)
+       } catch (error) {
+           next(error)
+       }
     }
    async createComment(req, res, next) {
         try {
@@ -22,8 +31,9 @@ export class CommentsController extends BaseController {
     }
    async removeComment(req, res, next) {
         try {
-            req.body.id = req.params.commentId
-           const removed = await commentsService.removeComment(req.body)
+            
+            // req.body.id = req.params.id
+           const removed = await commentsService.removeComment(req.params.commentId, req.userInfo.id)
             res.send(removed)
         } catch (error) {
             next(error)

@@ -10,10 +10,13 @@ export class AccountController extends BaseController {
       .get('', this.getUserAccount)
       .get('/tickets', this.getMyTickets)
   }
+
+  // TODO may need to change this to get correct tickets
   async getMyTickets(req, res, next) {
     try {
-
-      const tickets = await accountService.getMyTickets()
+      req.body.creatorId = req.userInfo.id
+      const tickets = await accountService.getMyTickets(req.body.creatorId)
+      tickets.filter(t => t.accountId !== req.body.accountId)
       return res.send(tickets)
     } catch (error) {
       next(error)

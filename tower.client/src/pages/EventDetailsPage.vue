@@ -1,9 +1,10 @@
 <template>
     <div class="container-fluid">
-        <div class="row bg-light text-dark">
+        <div class="row bg-light text-dark" >
             <!-- Details -->
-            <div class="col-md-4 p-4">
+            <div class="col-md-4 p-4" :class="activeEvent?.capacity <= 0 || activeEvent.isCanceled ? 'bg-danger' : 'bg-light'">
              <img :src="activeEvent?.coverImg" alt="cover image" class="img-fluid">
+            <span class="fs-1" v-show="activeEvent?.capacity <= 0 || activeEvent.isCanceled">EVENT NO LONGER AVAILABLE</span>
             </div>
             <div class="col-md-8 p-4">
                 <div class="d-flex justify-content-between">
@@ -16,7 +17,7 @@
                 </div>
                 <p>{{activeEvent?.description}}</p>
                 <div class="d-flex justify-content-between my-4">
-                    <span><b class="text-danger">{{activeEvent?.capacity}}</b> spots left</span>
+                    <span><b class="text-dark">{{activeEvent?.capacity}}</b> spots left</span>
                     <span><button @click="createTicket()" :title="'attend '+ activeEvent?.type" class="btn btn-warning">Attend {{activeEvent?.type}} <i class="mdi mdi-account"></i></button></span>
                 </div>
             </div>
@@ -82,6 +83,7 @@ export default {
             comment,
             activeEvent: computed(()=> AppState.activeEvent),
             activeComments: computed(()=> AppState.activeComments),
+            // activeTickets: computed(()=> AppState.activeTickets),
 
             async createTicket(){
                 try {
@@ -89,7 +91,9 @@ export default {
                         Pop.toast('There are no tickets left')
                         return
                     }
+                    logger.log()
                   await ticketsService.createTicket(route.params.eventId)
+                    Pop.toast('Ticket generation success', 'success')
                 } catch (error) {
                   logger.error(error)
                   Pop.toast(error.message, 'error')

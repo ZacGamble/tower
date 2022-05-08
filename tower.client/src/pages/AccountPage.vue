@@ -11,6 +11,7 @@
     <div class="col-md-6">
       <h5>Upcoming events</h5>
       <!-- inject my upcoming events/ events I hold tickets for -->
+      <div>{{myTickets}}</div>
     </div>
   </div>
 </div>
@@ -27,10 +28,12 @@ export default {
     onMounted(async()=> {
       await towerEventsService.getMyEvents(AppState.account)
       await accountService.getAccount()
+      await accountService.getMyTickets()
     })
     return {
       account: computed(() => AppState.account),
-      myEvents: computed(()=> AppState.myEvents)
+      myEvents: computed(()=> AppState.myEvents),
+      myTickets: computed(()=> AppState.myTickets)
       
     }
   }

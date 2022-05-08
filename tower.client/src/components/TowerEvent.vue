@@ -1,11 +1,12 @@
 <template>
-     <div class="col-md-4 my-3 p-3">
+     <div class="col-md-4 my-3 p-3" >
         <div @click.stop="openEventPage('EventDetailsPage', {eventId: towerEvent.id})" class="border border-dark selectable mb-4" :title="'open details for ' + towerEvent.name">
         <img class="img-fluid background my-3 rounded img-clamp" :src="towerEvent.coverImg" />
+        <div class="fs-6 fw-bold text-danger" v-show="towerEvent?.capacity <= 0 || towerEvent.isCanceled">EVENT NO LONGER AVAILABLE</div>
         <h4>{{towerEvent.name}}</h4>
         <p>Booked on <b>{{towerEvent.startDate.substring(5, 10)}}</b><br> {{towerEvent.location}}</p>
         <h6></h6>
-        <i> {{towerEvent.capacity}} tickets remaining </i>
+        <i > {{towerEvent.capacity}} tickets remaining </i>
         <hr>
         </div>
       </div>
