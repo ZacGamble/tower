@@ -1,3 +1,4 @@
+import { useRoute } from "vue-router"
 import { AppState } from "../AppState"
 import { logger } from "../utils/Logger"
 import { api } from "./AxiosService"
@@ -25,6 +26,12 @@ class TowerEventsService {
         const res = await api.get('api/events/' + eventId + '/comments')
         AppState.activeComments = res.data
         logger.log('comments service > get comments ', res.data)
+    }
+    async getMyEvents(account){
+        const res = await api.get('api/events')
+        const myEvents = res.data.filter(r => r.creatorId === account.id)
+        AppState.myEvents = myEvents
+        // logger.log('events service > getting my account events', myEvents)
     }
     async getTowerConcerts(){
         const res = await api.get('api/events')
