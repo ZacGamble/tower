@@ -17,7 +17,7 @@
                 <p>{{activeEvent?.description}}</p>
                 <div class="d-flex justify-content-between my-4">
                     <span><b class="text-danger">{{activeEvent?.capacity}}</b> spots left</span>
-                    <span><button :title="'attend '+activeEvent?.type" class="btn btn-warning">Attend {{activeEvent?.type}} <i class="mdi mdi-account"></i></button></span>
+                    <span><button @click="createTicket()" :title="'attend '+ activeEvent?.type" class="btn btn-warning">Attend {{activeEvent?.type}} <i class="mdi mdi-account"></i></button></span>
                 </div>
             </div>
         </div>
@@ -52,6 +52,7 @@ import { AppState } from '../AppState'
 import { onMounted, watchEffect } from '@vue/runtime-core'
 import { towerEventsService } from '../services/TowerEventsService'
 import { commentsService } from '../services/CommentsService'
+import { ticketsService } from '../services/TicketsService'
 import Pop from '../utils/Pop'
 import { logger } from '../utils/Logger'
 import { useRoute } from 'vue-router'
@@ -82,23 +83,28 @@ export default {
             activeEvent: computed(()=> AppState.activeEvent),
             activeComments: computed(()=> AppState.activeComments),
 
+            async createTicket(){
+                try {
+                    if (AppState.activeEvent.capacity == 0) {
+                        Pop.toast('There are no tickets left')
+                        return
+                    }
+                  await ticketsService.createTicket(route.params.eventId)
+                } catch (error) {
+                  logger.error(error)
+                  Pop.toast(error.message, 'error')
+                }
+            },
+
             async submitComment(){
                 try {
-                  await commentsService.createComment(comment.value, route.params.eventId)
+                  await commentsService.createComment(comment.value)
+
                 } catch (error) {
                   logger.error(error)
                   Pop.toast(error.message, 'error')
                 }
             }
-
-            //     async getActiveEvent(){
-            //     try {
-            //     await towerEventsService.getActiveEvent(route.params.id)
-            //     } catch (error) {
-            //       logger.error(error)
-            //       Pop.toast(error.message, 'error')
-            //     }
-            // },
           
         }
     }

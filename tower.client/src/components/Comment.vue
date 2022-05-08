@@ -4,7 +4,7 @@
     <div class="d-flex flex-column border-light bg-grey p-2 rounded my-4 mx-5 flex-grow-1">
         <div class="d-flex justify-content-between">
 
-      <h5 class="p-2">{{account.name}} says:</h5>  
+      <h5 class="p-2">{{account.name}}</h5>  
       <i v-show="comment.creatorId == account.id" class="mdi mdi-delete fs-2 action" title="delete comment" @click="deleteComment(comment.id)"></i>
         </div>
         <p>{{comment.body}}</p>

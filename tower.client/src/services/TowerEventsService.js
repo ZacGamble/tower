@@ -23,6 +23,7 @@ class TowerEventsService {
     }
 
     async getCommentsByEvent(eventId){
+        AppState.activeComments = []
         const res = await api.get('api/events/' + eventId + '/comments')
         AppState.activeComments = res.data
         logger.log('comments service > get comments ', res.data)

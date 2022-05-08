@@ -16,7 +16,7 @@ export class TicketsController extends BaseController {
         try {
             req.body.accountId = req.userInfo.id
             const newTicket = await ticketsService.create(req.body)
-            // await towerEventsService.editCapacity()
+            const modifiedEventCapacity= await towerEventsService.editCapacity(req.body.eventId)
             return res.send(newTicket)
         } catch (error) {
             next(error)
