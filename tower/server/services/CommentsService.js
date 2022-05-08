@@ -7,7 +7,8 @@ class CommentsService {
         return created
     }
    async removeComment(body) {
-        
+        const removed = await dbContext.Comments.findByIdAndDelete(body)
+        return removed
     }
 
 }

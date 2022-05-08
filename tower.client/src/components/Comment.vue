@@ -2,7 +2,11 @@
 <div class="d-flex my-3">
     <img :src="account.picture" alt="profile image" class="picture">
     <div class="d-flex flex-column border-light bg-grey p-2 rounded my-4 mx-5 flex-grow-1">
-      <h5 class="bg-dark p-2">{{account.name}} says:</h5>  
+        <div class="d-flex justify-content-between">
+
+      <h5 class="p-2">{{account.name}} says:</h5>  
+      <i v-show="comment.creatorId == account.id" class="mdi mdi-delete fs-2 action" title="delete comment" @click="deleteComment(comment.id)"></i>
+        </div>
         <p>{{comment.body}}</p>
     </div>
 </div>
@@ -15,6 +19,9 @@ import { AppState } from '../AppState'
 import { onMounted, watchEffect } from '@vue/runtime-core'
 import { towerEventsService } from '../services/TowerEventsService'
 import { logger } from '../utils/Logger'
+import Pop from '../utils/Pop'
+import { commentsService } from '../services/CommentsService'
+import { useRoute } from 'vue-router'
 export default {
     props: {
         comment:{
@@ -24,13 +31,28 @@ export default {
     },
 
     setup(props){
+        const route = useRoute();
+
         //  onMounted(()=>{
-            
+        //     logger.log('what is a prop?', props.comment)
         //  })
         return {
             account: computed(()=> AppState.account),
             activeEvent: computed(()=> AppState.activeEvent),
             activeComments: computed(()=> AppState.activeComments),
+
+            async deleteComment(id){
+                try {
+                    if (await Pop.confirm()) {
+                        await commentsService.deleteComment(id)
+                        Pop.toast('Comment deleted!', 'success')
+                    }
+
+                } catch (error) {
+                  logger.error(error)
+                  Pop.toast(error.message, 'error')
+                }
+            }
           
         }
     }
