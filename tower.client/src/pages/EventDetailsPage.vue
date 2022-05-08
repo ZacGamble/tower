@@ -17,7 +17,7 @@
                 <p>{{activeEvent?.description}}</p>
                 <div class="d-flex justify-content-between my-4">
                     <span><b class="text-danger">{{activeEvent?.capacity}}</b> spots left</span>
-                    <span><button class="btn btn-warning">Attend {{activeEvent?.type}} <i class="mdi mdi-account"></i></button></span>
+                    <span><button :title="'attend '+activeEvent?.type" class="btn btn-warning">Attend {{activeEvent?.type}} <i class="mdi mdi-account"></i></button></span>
                 </div>
             </div>
         </div>
@@ -31,15 +31,15 @@
             <!-- Comments -->
             <div class="col-md-12 px-5 bg-secondary">
                       <small>What are people saying</small>
-                <form class="d-flex flex-column border border-dark p-3 rounded">
+                <form class="d-flex flex-column border border-dark p-3 rounded" @submit.prevent="submitComment()">
                     <div class="d-flex justify-content-end"><small>Join the conversation</small></div>
-                      <textarea class="bg-grey" name="comment-field" id="comment-field" title="leave a comment" placeholder="Tell the people..."></textarea>
+                      <textarea class="bg-grey" name="comment-field" id="comment-field" title="leave a comment" placeholder="Tell the people..." v-model="comment.body"></textarea>
                       <div class="d-flex justify-content-end">
                         <button class="btn btn-success mt-4" type="submit" title="submit comment">post comment</button>
                       </div>
                 </form>
                 <!-- Comment component here -->
-                <Comment/>
+                <Comment v-for="c in activeComments" :key="c.id" :comment="c"/>
             </div>
         </div>
     </div>
@@ -47,7 +47,7 @@
 
 
 <script>
-import { computed } from '@vue/reactivity'
+import { computed, ref } from '@vue/reactivity'
 import { AppState } from '../AppState'
 import { onMounted, watchEffect } from '@vue/runtime-core'
 import { towerEventsService } from '../services/TowerEventsService'
@@ -60,22 +60,36 @@ export default {
     setup(){
 
         const route = useRoute()
+        const comment = ref({eventId: route.params.eventId})
         onMounted(async()=> {
             try {
                 // logger.log(route.params.eventId)
                 AppState.activeEvent = null;
-           await towerEventsService.getActiveEvent(route.params.eventId)
-           await towerEventsService.getCommentsByEvent(route.params.eventId)
+                await towerEventsService.getActiveEvent(route.params.eventId)
+                await towerEventsService.getCommentsByEvent(route.params.eventId)
             } catch (error) {
               logger.error(error)
               Pop.toast(error.message, 'error')
             }
         
-            })
+            }),
+
+             watchEffect(async()=> {
+        })
 
         return {
+            comment,
             activeEvent: computed(()=> AppState.activeEvent),
             activeComments: computed(()=> AppState.activeComments),
+
+            async submitComment(){
+                try {
+                  await commentsService.createComment(comment.value, route.params.eventId)
+                } catch (error) {
+                  logger.error(error)
+                  Pop.toast(error.message, 'error')
+                }
+            }
 
             //     async getActiveEvent(){
             //     try {

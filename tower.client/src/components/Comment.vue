@@ -3,7 +3,7 @@
     <img :src="account.picture" alt="profile image" class="picture">
     <div class="d-flex flex-column border-light bg-grey p-2 rounded my-4 mx-5 flex-grow-1">
       <h5 class="bg-dark p-2">{{account.name}} says:</h5>  
-        Hello/comment body
+        <p>{{comment.body}}</p>
     </div>
 </div>
 </template>
@@ -12,11 +12,26 @@
 <script>
 import { computed } from '@vue/reactivity'
 import { AppState } from '../AppState'
+import { onMounted, watchEffect } from '@vue/runtime-core'
+import { towerEventsService } from '../services/TowerEventsService'
+import { logger } from '../utils/Logger'
 export default {
-    setup(){
+    props: {
+        comment:{
+            type: Object,
+            required: true
+        }
+    },
+
+    setup(props){
+        //  onMounted(()=>{
+            
+        //  })
         return {
             account: computed(()=> AppState.account),
-            activeEvent: computed(()=> AppState.activeEvent)
+            activeEvent: computed(()=> AppState.activeEvent),
+            activeComments: computed(()=> AppState.activeComments),
+          
         }
     }
 }
