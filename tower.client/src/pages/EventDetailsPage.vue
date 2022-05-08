@@ -51,6 +51,7 @@ import { computed } from '@vue/reactivity'
 import { AppState } from '../AppState'
 import { onMounted, watchEffect } from '@vue/runtime-core'
 import { towerEventsService } from '../services/TowerEventsService'
+import { commentsService } from '../services/CommentsService'
 import Pop from '../utils/Pop'
 import { logger } from '../utils/Logger'
 import { useRoute } from 'vue-router'
@@ -64,6 +65,7 @@ export default {
                 // logger.log(route.params.eventId)
                 AppState.activeEvent = null;
            await towerEventsService.getActiveEvent(route.params.eventId)
+           await towerEventsService.getCommentsByEvent(route.params.eventId)
             } catch (error) {
               logger.error(error)
               Pop.toast(error.message, 'error')
@@ -73,22 +75,21 @@ export default {
 
         return {
             activeEvent: computed(()=> AppState.activeEvent),
+            activeComments: computed(()=> AppState.activeComments),
 
-                async getActiveEvent(){
-                try {
-                await towerEventsService.getActiveEvent(route.params.id)
-                } catch (error) {
-                  logger.error(error)
-                  Pop.toast(error.message, 'error')
-                }
-            },
+            //     async getActiveEvent(){
+            //     try {
+            //     await towerEventsService.getActiveEvent(route.params.id)
+            //     } catch (error) {
+            //       logger.error(error)
+            //       Pop.toast(error.message, 'error')
+            //     }
+            // },
           
         }
     }
 }
 </script>
-
-
 <style lang="scss" scoped>
 
 </style>

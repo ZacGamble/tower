@@ -44,7 +44,7 @@ export class TowerEventsController extends BaseController {
     }   
     async getEventComments(req, res, next) {
         try {
-           const comments = await towerEventsService.getEventComments()
+           const comments = await towerEventsService.getEventComments(req.params.eventId)
            return res.send(comments)
         } catch (error) {
             next(error)

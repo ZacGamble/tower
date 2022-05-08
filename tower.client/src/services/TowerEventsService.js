@@ -20,6 +20,12 @@ class TowerEventsService {
         AppState.activeEvents.reverse()
         // logger.log('EventsService >', res.data)
     }
+
+    async getCommentsByEvent(eventId){
+        const res = await api.get('api/events/' + eventId + '/comments')
+        AppState.activeComments = res.data
+        logger.log('comments service > get comments ', res.data)
+    }
     async getTowerConcerts(){
         const res = await api.get('api/events')
         const concerts =  res.data.filter(r => r.type === 'concert')
@@ -42,6 +48,5 @@ class TowerEventsService {
         const sports =  res.data.filter(r => r.type === 'sport')
         AppState.activeEvents = sports
     }
-    
 }
 export const towerEventsService = new TowerEventsService()

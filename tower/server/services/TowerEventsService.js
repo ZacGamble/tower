@@ -18,8 +18,8 @@ class TowerEventsService {
     async getTicketsByEvent(eventId) {
         return await dbContext.Tickets.find({eventId}).populate('account')
     }  
-    async getEventComments() {
-        return await dbContext.TowerEvents.find().populate('creator')
+    async getEventComments(eventId) {
+        return await dbContext.Comments.find({eventId}).populate('creator')
     }
    async create(body) {
         const created = await dbContext.TowerEvents.create(body)
