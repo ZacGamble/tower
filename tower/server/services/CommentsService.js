@@ -18,7 +18,7 @@ class CommentsService {
     }
    async removeComment(commentId, userId) {
         const comment = await this.getCommentById(commentId);
-
+    // TODO get identity check working here and on any other puts/deletes
        if (comment.creatorId.toString() !== userId) {
            throw new Forbidden("You do not have permission to delete this.")
        }

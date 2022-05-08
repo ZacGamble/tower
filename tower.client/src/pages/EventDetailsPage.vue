@@ -2,9 +2,9 @@
     <div class="container-fluid">
         <div class="row bg-light text-dark" >
             <!-- Details -->
-            <div class="col-md-4 p-4" :class="activeEvent?.capacity <= 0 || activeEvent.isCanceled ? 'bg-danger' : 'bg-light'">
+            <div class="col-md-4 p-4" :class="activeEvent?.capacity <= 0 || activeEvent?.isCanceled ? 'bg-danger' : 'bg-light'">
              <img :src="activeEvent?.coverImg" alt="cover image" class="img-fluid">
-            <span class="fs-1" v-show="activeEvent?.capacity <= 0 || activeEvent.isCanceled">EVENT NO LONGER AVAILABLE</span>
+            <span class="fs-1" v-show="activeEvent?.capacity <= 0 || activeEvent?.isCanceled">EVENT NO LONGER AVAILABLE</span>
             </div>
             <div class="col-md-8 p-4">
                 <div class="d-flex justify-content-between">
@@ -26,6 +26,7 @@
             <!-- Attendees -->
             <div class="col-md-12">
             <small>See who is attending</small>
+            <Attendees v-for="t in activeTickets" :key="t.id" :attendee="t"/>
             </div>
         </div>
         <div class="row">
@@ -69,6 +70,7 @@ export default {
                 AppState.activeEvent = null;
                 await towerEventsService.getActiveEvent(route.params.eventId)
                 await towerEventsService.getCommentsByEvent(route.params.eventId)
+                await towerEventsService.getTicketsByEvent(route.params.eventId)
             } catch (error) {
               logger.error(error)
               Pop.toast(error.message, 'error')
@@ -83,7 +85,7 @@ export default {
             comment,
             activeEvent: computed(()=> AppState.activeEvent),
             activeComments: computed(()=> AppState.activeComments),
-            // activeTickets: computed(()=> AppState.activeTickets),
+            activeTickets: computed(()=> AppState.activeTickets),
 
             async createTicket(){
                 try {
