@@ -5,10 +5,13 @@ class TicketsService {
 
   async create(body) {
       
+        const changedEvent = await dbContext.TowerEvents.findById(body.eventId)
+        if (changedEvent.capacity <= 0) {
+          throw new BadRequest('This event is sold out!')
+        }
+        changedEvent.capacity --
         const createdTicket = await dbContext.Tickets.create(body)
         await createdTicket.populate('account event') 
-        const changedEvent = await dbContext.TowerEvents.findById(body.eventId)
-        changedEvent.capacity --
         await changedEvent.save()
         
         return createdTicket

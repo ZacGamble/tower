@@ -30,9 +30,9 @@ class TowerEventsService {
     //TODO get this owenership check working
    async edit(body) {
         const original = await this.getById(body.id)
-        // if(original.creatorId.toString() != body.creatorId) {
-        //     throw new Forbidden('You do not have permission to edit this.')
-        // }
+        if(original._doc.creatorId.toString() != body.creatorId) {
+            throw new Forbidden('You do not have permission to edit this.')
+        }
         if(original.isCanceled == true) {
             throw new BadRequest('This event is no longer available')
         }
