@@ -5,7 +5,8 @@ class TicketsService {
   async create(body) {
       
         const createdTicket = await dbContext.Tickets.create(body)
-        await createdTicket.populate('account')
+        await createdTicket.populate('account TowerEvents') 
+        
         return createdTicket
     }
   async remove(ticketId, id) {

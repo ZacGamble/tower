@@ -48,7 +48,7 @@ class TowerEventsService {
         
     }
    async remove(eventId, userId) {
-        const removedEvent = await this.getById(eventId);
+        const removedEvent = await this.getById(eventId)
         if(removedEvent.creatorId.toString() !== userId) {
             throw new Forbidden('You do not have permissions to do this')
         }
