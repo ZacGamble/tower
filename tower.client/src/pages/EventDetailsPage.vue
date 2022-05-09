@@ -43,7 +43,8 @@
             ><b class="text-dark">{{ activeEvent?.capacity }}</b> spots
             left</span
           >
-          <span v-else><b class="text-dark">NO SPOTS LEFT</b> </span>
+          <span v-else><b class="text-dark">NO SPOTS LEFT</b></span>
+
           <span v-show="!activeEvent?.isCanceled"
             ><button
               @click="createTicket()"
@@ -148,6 +149,7 @@ export default {
       activeEvent: computed(() => AppState.activeEvent),
       activeComments: computed(() => AppState.activeComments),
       activeTickets: computed(() => AppState.activeTickets),
+      myTicketsForEvent: computed(() => AppState.activeTickets.find(t => t.eventId == AppState.activeEvent.id)),
       account: computed(() => AppState.account),
 
       async createTicket() {
