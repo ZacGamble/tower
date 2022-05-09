@@ -14,7 +14,6 @@
                 </div>
                 <div class="d-flex justify-content-between">
                     <h6>{{activeEvent?.location}}</h6>
-                    
                 </div>
                 <p>{{activeEvent?.description}}</p>
                 <div class="d-flex justify-content-between my-4">
@@ -103,6 +102,7 @@ export default {
                     }
                   
                   await ticketsService.createTicket(route.params.eventId)
+                //   TODO get this event capacity thing working
                   await towerEventsService.editEventCapacity(route.params.eventId, capacityShift)
                   
                     Pop.toast('Ticket generation success', 'success')

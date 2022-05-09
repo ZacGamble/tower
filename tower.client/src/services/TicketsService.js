@@ -10,14 +10,16 @@ class TicketsService {
             throw new Error('You already have a ticket for that event')
         }
         const res = await api.post('api/tickets', {eventId})
-        AppState.myTickets.unshift(res.data)
+        AppState.myTickets = [...AppState.myTickets, res.data]
+        const eventTickets = await towerEventsService.getTicketsByEvent(eventId)
+        AppState.activeTickets = [eventTickets, ...AppState.activeTickets, res.data]
         logger.log('tickets service > create ticket', res.data)
     }
 
     async destroyTicket(ticketId){            
             const res = await api.delete('api/tickets/' + ticketId)
             const myTickets = await accountService.getMyTickets()
-            AppState.myTickets = [...myTickets]
+            AppState.myTickets = [...AppState.myTickets]
             logger.log('destroyed ticket', res.data)
         
     }

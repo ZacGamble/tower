@@ -54,8 +54,8 @@
           <div class="d-flex flex-column">
             <div class="d-flex">
           <input class="m-2 p-2 rounded" type="date" v-model="editable.startDate">
-          <select name="type" id="type-select" v-model="editable.type">
-            <option value="concert">Concert</option>
+          <select name="type" id="type-select" v-model="editable.type" >
+            <option value="concert" selected>Concert</option>
             <option value="convention">Convention</option>
             <option value="sport">Sport</option>
             <option value="digital">Digital</option>
@@ -63,8 +63,11 @@
             </div>
           <textarea type="text" placeholder="description..." v-model="editable.description"/>
           </div>
-        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-        <button type="submit" class="btn btn-primary">Save changes</button>
+          <div class="d-flex justify-content-between">
+
+        <button type="button" class="btn btn-secondary mt-2" data-bs-dismiss="modal">Close</button>
+        <button type="submit" class="btn btn-primary mt-2 ">Save changes</button>
+          </div>
         </form>
       </div>
     </div>
@@ -105,6 +108,7 @@ export default {
         const newEvent = await towerEventsService.createTowerEvent(editable.value) 
          Modal.getOrCreateInstance(document.getElementById("eventModal")).hide()
          Pop.toast('Event created successfully', 'success')
+         editable = {}
          router.push({name: 'EventDetailsPage', params: {eventId: AppState.activeEvent.id}})
         } catch (error) {
           logger.error(error)

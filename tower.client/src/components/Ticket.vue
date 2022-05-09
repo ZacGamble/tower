@@ -1,7 +1,19 @@
 <template>
-    <div class="d-flex justify-content-between me-5">
-        {{ticket?.id}}
-        <i @click="destroyTicket(ticket?.id)" class="mdi mdi-delete selectable">Destroy</i>
+    <div class="d-flex justify-content-between me-5 col-md-3">
+        <div class="bg-grey rounded p-3">
+            <img class="img-fluid img-clamp" :src="ticket?.TowerEvents.coverImg" alt="event picture" title="event photo">
+            <div class="ms-2">
+            <h5>
+        {{ticket?.TowerEvents.name}}
+            </h5>
+            <p>Begins
+        {{ticket?.TowerEvents.startDate.substring(11, 16) + " o'clock"}}, {{ticket?.TowerEvents.startDate.substring(5, 10)}}
+         <br>
+        {{ticket?.TowerEvents.location}}
+        </p>
+        <i @click="destroyTicket(ticket?.id)" class="mdi mdi-delete selectable" title="delete ticket" aria-label="delete ticket">Destroy</i>
+            </div>
+        </div>
     </div>
 </template>
 
@@ -25,16 +37,18 @@ export default {
     setup(props){
         watchEffect(()=>{
             
-        })
+            })
        const route = useRoute()
         return {
             towers: computed(()=> AppState.myTickets.TowerEvents),
             // TODO delete tickets and get new event populated ones
            async destroyTicket(ticketId){
                 try {
-                  await ticketsService.destroyTicket(ticketId)
+                    if (await Pop.confirm()) {
+                        await ticketsService.destroyTicket(ticketId)
                   logger.log('got this far')
                   Pop.toast('Ticket shredded', 'success')
+                    }
                 } catch (error) {
                   logger.error(error)
                   Pop.toast(error.message, 'error')
@@ -47,5 +61,9 @@ export default {
 
 
 <style lang="scss" scoped>
-
+    .img-clamp{
+        height: 8em;
+        width: 8em;
+        border-radius: 15%;
+    }
 </style>
