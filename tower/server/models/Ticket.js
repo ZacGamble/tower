@@ -20,7 +20,7 @@ TicketSchema.virtual('account', {
     ref: 'Account',
     justOne: true
 })
-
+// TODO I don't think I am populating the tower events correctly, FIX IT
 TicketSchema.virtual('TowerEvents', {
     localField: 'eventId',
     foreignField: '_id',

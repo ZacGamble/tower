@@ -12,7 +12,7 @@ class AccountService {
     }
   }
 
-  //TODO may need to change this to get correct tickets 
+  //REVIEW may need to change this to get correct tickets 
   async getMyTickets(creatorId) {
     try {
       const res = await api.get('/account/tickets')

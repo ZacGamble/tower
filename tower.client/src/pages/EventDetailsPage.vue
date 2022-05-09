@@ -65,6 +65,7 @@ export default {
 
         const route = useRoute()
         const comment = ref({eventId: route.params.eventId})
+        const capacityShift = ref({capacity: -1})
         onMounted(async()=> {
             try {
                 // logger.log(route.params.eventId)
@@ -83,6 +84,7 @@ export default {
         })
 
         return {
+            capacityShift,
             comment,
             activeEvent: computed(()=> AppState.activeEvent),
             activeComments: computed(()=> AppState.activeComments),
@@ -91,12 +93,18 @@ export default {
 
             async createTicket(){
                 try {
-                    if (AppState.activeEvent.capacity == 0) {
-                        Pop.toast('There are no tickets left')
+                    if (AppState.activeEvent.capacity == 0 || AppState.activeEvent.isCanceled) {
+                        Pop.toast('This event is now unavailable')
                         return
                     }
-                    logger.log()
+                    if(AppState.activeTickets.find(t => t.accountId === this.account.id)){
+                        Pop.toast('You already have a ticket', 'info')
+                        return
+                    }
+                  
                   await ticketsService.createTicket(route.params.eventId)
+                  await towerEventsService.editEventCapacity(route.params.eventId, capacityShift)
+                  
                     Pop.toast('Ticket generation success', 'success')
                 } catch (error) {
                   logger.error(error)

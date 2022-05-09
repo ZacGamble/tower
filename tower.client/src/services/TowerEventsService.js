@@ -16,6 +16,12 @@ class TowerEventsService {
         AppState.activeEvent = res.data
         logger.log('canceled event > towerEvent service >', res.data)
     }
+
+    async editEventCapacity(eventId, capacityChange){
+        const res = await api.put('api/events/' + eventId, capacityChange)
+        AppState.activeEvent = res.data
+        logger.log('capacity shifted', res.data)
+    }
     async getActiveEvent(routeId){
         const res = await api.get('api/events/' + routeId)
         AppState.activeEvent = res.data
