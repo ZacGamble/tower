@@ -45,7 +45,7 @@ class TowerEventsService {
         // logger.log('events service > get comments ', res.data)
     }
     async getTicketsByEvent(eventId){
-        AppState.activeTickets = []
+        // AppState.activeTickets = []
         const res = await api.get('api/events/' + eventId + '/tickets')
         AppState.activeTickets = res.data
         logger.log('events service > get tickets for event > ', AppState.activeTickets)

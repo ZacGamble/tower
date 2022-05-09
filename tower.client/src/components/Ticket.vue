@@ -3,20 +3,20 @@
     <div class="bg-grey rounded p-3">
       <img
         class="img-fluid img-clamp"
-        :src="ticket?.TowerEvents.coverImg"
+        :src="ticket?.event.coverImg"
         alt="event picture"
         title="event photo"
       />
       <div class="ms-2">
         <h5>
-          {{ ticket?.TowerEvents.name }}
+          <!-- {{ ticket?.TowerEvents.name }} -->
         </h5>
         <p>
           Begins
-          {{ ticket?.TowerEvents.startDate.substring(11, 16) + " o'clock" }},
-          {{ ticket?.TowerEvents.startDate.substring(5, 10) }}
+          {{ ticket?.event.startDate.substring(11, 16) + " o'clock" }},
+          {{ ticket?.event.startDate.substring(5, 10) }}
           <br />
-          {{ ticket?.TowerEvents.location }}
+          {{ ticket?.event.location }}
         </p>
         <i
           @click="destroyTicket(ticket?.id)"
@@ -48,10 +48,6 @@ export default {
   },
 
   setup(props) {
-    watchEffect(() => {
-
-    })
-    const route = useRoute()
     return {
       towers: computed(() => AppState.myTickets.TowerEvents),
 

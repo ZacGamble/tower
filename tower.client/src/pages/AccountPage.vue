@@ -1,16 +1,14 @@
 <template>
-<div class="container-fluid">
-  <div class="row">
-        <Ticket v-for="m in myTickets" :key="m.id" :ticket="m"/>
-  </div>
-      <div class="row">
-    
+  <div class="container-fluid">
+    <div class="row">
+      <Ticket v-for="m in myTickets" :key="m.id" :ticket="m" />
+    </div>
+    <div class="row">
       <h5 class="py-3">My Events</h5>
       <!-- Inject events by account -->
-      <TowerEvent v-for="t in myEvents" :key="t.id" :towerEvent="t"/>
-      
-      </div>
+      <TowerEvent v-for="t in myEvents" :key="t.id" :towerEvent="t" />
     </div>
+  </div>
 </template>
 
 <script>
@@ -23,7 +21,7 @@ export default {
   components: { Ticket },
   name: 'Account',
   setup() {
-    onMounted(async()=> {
+    onMounted(async () => {
       await towerEventsService.getMyEvents(AppState.account)
       await accountService.getAccount()
       await accountService.getMyTickets()
@@ -31,10 +29,8 @@ export default {
     })
     return {
       account: computed(() => AppState.account),
-      myEvents: computed(()=> AppState.myEvents),
-      myTickets: computed(()=> AppState.myTickets),
-      
-      
+      myEvents: computed(() => AppState.myEvents),
+      myTickets: computed(() => AppState.myTickets)
     }
   }
 }

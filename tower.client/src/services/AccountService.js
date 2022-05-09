@@ -17,7 +17,7 @@ class AccountService {
     try {
       const res = await api.get('/account/tickets')
       AppState.myTickets = res.data
-      logger.log('get my ticktets > account service > ', res.data)
+      logger.log('get my ticktets > account service > ', AppState.myTickets)
     } catch (error) {
       logger.error('Something went wrong while fetching your tickets')
     }
