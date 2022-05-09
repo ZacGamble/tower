@@ -1,6 +1,8 @@
 import { AppState } from "../AppState"
 import { logger } from "../utils/Logger"
+import { accountService } from "./AccountService"
 import { api } from "./AxiosService"
+import { towerEventsService } from "./TowerEventsService"
 class TicketsService {
     async createTicket(eventId){
         const myTickets = AppState.myTickets
@@ -10,6 +12,14 @@ class TicketsService {
         const res = await api.post('api/tickets', {eventId})
         AppState.myTickets.unshift(res.data)
         logger.log('tickets service > create ticket', res.data)
+    }
+
+    async destroyTicket(ticketId){            
+            const res = await api.delete('api/tickets/' + ticketId)
+            const myTickets = await accountService.getMyTickets()
+            AppState.myTickets = [...myTickets]
+            logger.log('destroyed ticket', res.data)
+        
     }
 }
 

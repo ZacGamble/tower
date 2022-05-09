@@ -1,11 +1,11 @@
 <template>
   <nav class="navbar navbar-expand-lg navbar-dark bg-secondary px-3">
-    <router-link class="navbar-brand d-flex" :to="{ name: 'Home' }">
+    <div @click="navigateTo()" class="navbar-brand d-flex selectable">
       <div class="d-flex align-items-center fs-1">
 
         T<i class="mdi mdi-bird"></i>wer
       </div>
-    </router-link>
+    </div>
       <button class="btn btn-primary mx-5 my-3" data-bs-toggle="modal" data-bs-target="#eventModal">Create Event</button>
     <button
       class="navbar-toggler"

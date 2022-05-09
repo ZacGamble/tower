@@ -45,7 +45,7 @@ function sanitizeBody(body) {
 class AccountService {
   // TODO get tickets for my specific account (may need to check account controller)
  async getMyTickets(id) {
-    return await dbContext.Tickets.find({id})
+    return await dbContext.Tickets.find({id}).populate('TowerEvents account')
   }
   /**
    * Returns a user account from the Auth0 user object

@@ -11,11 +11,16 @@
     <div class="col-md-6">
       <h5>Upcoming events</h5>
       <!-- inject my upcoming events/ events I hold tickets for -->
-      <Ticket/>
-      <div>{{myTickets}}</div>
+      <div>
+        <Ticket v-for="m in myTickets" :key="m.id" :ticket="m"/>
+          <!-- <div v-for="m in myTickets" :key="m.id" :myTicket="m" class="d-flex justify-content-between me-5">
+        {{myTicket}}
+        <i @click="destroyTicket(ticket?.id)" class="mdi mdi-delete selectable">Destroy</i> -->
+         </div>
+      </div>
     </div>
   </div>
-</div>
+
 </template>
 
 <script>
@@ -32,7 +37,7 @@ export default {
       await towerEventsService.getMyEvents(AppState.account)
       await accountService.getAccount()
       await accountService.getMyTickets()
-      await towerEventsService.getUpcomingEvents()
+      // await towerEventsService.getUpcomingEvents()
     })
     return {
       account: computed(() => AppState.account),

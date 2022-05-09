@@ -21,7 +21,7 @@ This template will automatically register all of the controllers found in the co
 
 ### MVC - Services
 
-Services are responsible for implementing and enforcing your business rules. Be sure to use them wisely and do not put your business logic in controllers. Services should be usable by both controllers and sockets and potentally other services. Never directly access the `DbContext` outside of a service.
+Services are responsible for implementing and enforcing your business rules. Be sure to use them wisely and do not put your business logic in controllers. Services should be usable by both controllers and sockets and potentially other services. Never directly access the `DbContext` outside of a service.
 
 ### MVC - (Models, Collections & DbContext)
 
@@ -29,7 +29,7 @@ Models are defined as mongoose schemas and then imported into a central location
 
 ### Working with Auth0
 
-This library provides easily configured middleware that will validate user auth tokens, roles, permissions and provides a simple approach to get userInfo associted with a user account. Each middleware will call next with an error on any failure so be sure to setup a default error handler. Also note that we extend the express request object with
+This library provides easily configured middleware that will validate user auth tokens, roles, permissions and provides a simple approach to get userInfo associated with a user account. Each middleware will call next with an error on any failure so be sure to setup a default error handler. Also note that we extend the express request object with
 
 - req.user: `{ UserIdentity }`
 - req.userInfo: `{ UserInfo }`
