@@ -11,9 +11,12 @@ class TicketsService {
         }
         const res = await api.post('api/tickets', {eventId})
         AppState.myTickets = [...AppState.myTickets, res.data]
-        const eventTickets = await towerEventsService.getTicketsByEvent(eventId)
-        AppState.activeTickets = [eventTickets, ...AppState.activeTickets, res.data]
-        logger.log('tickets service > create ticket', res.data)
+        const eventResponse = await api.put('api/events/' + eventId, capacityChange)
+        AppState.activeEvent = eventResponse.data
+        logger.log('capacity shifted', res.data)
+        // const eventTickets = await towerEventsService.getTicketsByEvent(eventId)
+        // AppState.activeTickets = [eventTickets, ...AppState.activeTickets, res.data]
+       
     }
 
     async destroyTicket(ticketId){            

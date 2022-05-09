@@ -13,8 +13,19 @@ export class TowerEventsController extends BaseController {
         .get('/:eventId/comments', this.getEventComments)
         .use(Auth0Provider.getAuthorizedUserInfo)
         .post('', this.create)
+        .put('/:eventId', this.capacityChange)
         .put('/:eventId', this.edit)
         .delete('/:eventId', this.remove)
+    }
+    async capacityChange(req, res, next) {
+        try {
+            req.body.id = req.params.eventId
+            req.body.creatorId = req.userInfo.id
+            const towerEvent = await towerEventsService.capacityChange(req.body)
+            return res.send(towerEvent)
+        } catch (error) {
+            next(error)
+        }
     }
  
    async getAll(req, res, next) {
