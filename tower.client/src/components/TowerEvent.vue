@@ -1,15 +1,33 @@
 <template>
-     <div class="col-md-3 col-sm-6 my-3 p-3 rounded">
-        <div @click.stop="openEventPage('EventDetailsPage', {eventId: towerEvent.id})" class="border border-dark selectable mb-4" :title="'open details for ' + towerEvent.name">
-        <img class="img-fluid background my-3 rounded img-clamp" :src="towerEvent.coverImg" />
-        <div class="fs-6 fw-bold text-danger" v-show="towerEvent?.capacity <= 0 || towerEvent?.isCanceled">EVENT NO LONGER AVAILABLE</div>
-        <h4>{{towerEvent.name}}</h4>
-        <p>Booked on <b>{{towerEvent?.startDate.substring(5, 10)}}</b><br> {{towerEvent?.location}}</p>
-        <h6></h6>
-        <i > {{towerEvent?.capacity}} tickets remaining </i>
-        <hr>
-        </div>
+  <div class="col-md-3 col-sm-6 my-3 p-3">
+    <div
+      @click.stop="
+        openEventPage('EventDetailsPage', { eventId: towerEvent.id })
+      "
+      class="border border-dark selectable p-1 tower-event"
+      :title="'open details for ' + towerEvent.name"
+    >
+      <img
+        class="img-fluid background my-3 rounded img-clamp"
+        :src="towerEvent.coverImg"
+      />
+      <div
+        class="fs-6 fw-bold text-danger"
+        v-show="towerEvent?.capacity <= 0 || towerEvent?.isCanceled"
+      >
+        EVENT NO LONGER AVAILABLE
       </div>
+      <h4>{{ towerEvent.name }}</h4>
+      <p>
+        Booked on <b>{{ towerEvent?.startDate.substring(5, 10) }}</b
+        ><br />
+        {{ towerEvent?.location }}
+      </p>
+      <h6></h6>
+      <i> {{ towerEvent?.capacity }} tickets remaining </i>
+      <hr />
+    </div>
+  </div>
 </template>
 
 <script>
@@ -18,44 +36,48 @@ import { useRoute, useRouter } from 'vue-router'
 import { AppState } from '../AppState'
 import { logger } from '../utils/Logger'
 export default {
-    props: {
-        towerEvent: {
-            type: Object,
-            required: true
-        }
-    },
+  props: {
+    towerEvent: {
+      type: Object,
+      required: true
+    }
+  },
 
-setup(props){
+  setup(props) {
     const router = useRouter()
     const route = useRoute()
-    watchEffect(()=> {
-        AppState.activeEvent = props.towerEvent
+    watchEffect(() => {
+      AppState.activeEvent = props.towerEvent
     })
 
-return {
+    return {
 
-    openEventPage(name, params) {
+      openEventPage(name, params) {
         AppState.activeEvent = props.towerEvent
-        router.push({name, params})
+        router.push({ name, params })
         logger.log('TowerEvent.vue > Appstate.activeEvent(page) ', AppState.activeEvent)
 
-            }
-        }
+      }
     }
+  }
 }
 </script>
 
 <style>
-.img-clamp{
-    width: 15em;
-    height: 12em;
-    border-radius: 20%;
+.img-clamp {
+  width: 15em;
+  height: 12em;
+  border-radius: 20%;
 }
 
-.background{
-    background-image: url();
-    background-size: cover;
+.background {
+  background-image: url();
+  background-size: cover;
 }
 
+.tower-event {
+  border-radius: 5%;
+  background-color: rgb(12, 12, 86);
+}
 </style>
 

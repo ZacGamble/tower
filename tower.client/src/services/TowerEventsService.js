@@ -47,7 +47,7 @@ class TowerEventsService {
     async getTicketsByEvent(eventId){
         // AppState.activeTickets = []
         const res = await api.get('api/events/' + eventId + '/tickets')
-        AppState.activeTickets = res.data
+        AppState.activeTickets = [...res.data]
         logger.log('events service > get tickets for event > ', AppState.activeTickets)
     }
     async getMyEvents(account){

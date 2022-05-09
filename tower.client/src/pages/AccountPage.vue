@@ -1,10 +1,15 @@
 <template>
   <div class="container-fluid">
+    <div class="row border-bottom border-light py-1">
+      <h5 class="py-2">My Tickets</h5>
+    </div>
     <div class="row">
       <Ticket v-for="m in myTickets" :key="m.id" :ticket="m" />
     </div>
+    <div class="row border-bottom border-light py-1">
+      <h5 class="">My Events</h5>
+    </div>
     <div class="row">
-      <h5 class="py-3">My Events</h5>
       <!-- Inject events by account -->
       <TowerEvent v-for="t in myEvents" :key="t.id" :towerEvent="t" />
     </div>

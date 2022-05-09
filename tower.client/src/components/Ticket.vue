@@ -5,11 +5,11 @@
         class="img-fluid img-clamp"
         :src="ticket?.event.coverImg"
         alt="event picture"
-        title="event photo"
+        :title="ticket.event.name"
       />
       <div class="ms-2">
         <h5>
-          <!-- {{ ticket?.TowerEvents.name }} -->
+          {{ ticket?.event.name }}
         </h5>
         <p>
           Begins
