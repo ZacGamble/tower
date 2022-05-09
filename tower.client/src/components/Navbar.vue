@@ -156,10 +156,9 @@ export default {
 
       async createTowerEvent() {
         try {
-          const newEvent = await towerEventsService.createTowerEvent(editable.value)
+          await towerEventsService.createTowerEvent(editable.value)
           Modal.getOrCreateInstance(document.getElementById("eventModal")).hide()
           Pop.toast('Event created successfully', 'success')
-          editable = {}
           router.push({ name: 'EventDetailsPage', params: { eventId: AppState.activeEvent.id } })
         } catch (error) {
           logger.error(error)

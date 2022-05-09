@@ -10,6 +10,7 @@
       <img
         class="img-fluid background my-3 rounded img-clamp"
         :src="towerEvent.coverImg"
+        :alt="towerEvent.name"
       />
       <div
         class="fs-6 fw-bold text-danger"

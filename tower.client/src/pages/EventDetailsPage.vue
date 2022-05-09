@@ -44,7 +44,7 @@
             left</span
           >
           <span v-else><b class="text-dark">NO SPOTS LEFT</b> </span>
-          <span
+          <span v-show="!activeEvent?.isCanceled"
             ><button
               @click="createTicket()"
               :title="'attend ' + activeEvent?.type"
