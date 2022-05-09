@@ -115,7 +115,7 @@ export default {
 
     const route = useRoute()
     const comment = ref({ eventId: route.params.eventId })
-    const capacityShift = ref({ capacity: -1 })
+
     onMounted(async () => {
       try {
         // logger.log(route.params.eventId)
@@ -134,7 +134,7 @@ export default {
       })
 
     return {
-      capacityShift,
+
       comment,
       activeEvent: computed(() => AppState.activeEvent),
       activeComments: computed(() => AppState.activeComments),
@@ -151,8 +151,7 @@ export default {
             Pop.toast('You already have a ticket', 'info')
             return
           }
-
-          await ticketsService.createTicket(route.params.eventId, capacityShift)
+          await ticketsService.createTicket(route.params.eventId)
 
           //   await towerEventsService.editEventCapacity(route.params.eventId, -1)
 

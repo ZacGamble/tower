@@ -10,13 +10,7 @@ class TicketsService {
             throw new Error('You already have a ticket for that event')
         }
         const res = await api.post('api/tickets', {eventId})
-        AppState.myTickets = [...AppState.myTickets, res.data]
-        const eventResponse = await api.put('api/events/' + eventId, capacityChange)
-        AppState.activeEvent = eventResponse.data
-        logger.log('capacity shifted', res.data)
-        // const eventTickets = await towerEventsService.getTicketsByEvent(eventId)
-        // AppState.activeTickets = [eventTickets, ...AppState.activeTickets, res.data]
-       
+        AppState.myTickets = [...AppState.myTickets, res.data]       
     }
 
     async destroyTicket(ticketId){            

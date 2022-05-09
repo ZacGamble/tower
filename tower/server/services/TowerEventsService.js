@@ -30,9 +30,9 @@ class TowerEventsService {
     //TODO get this owenership check working
    async edit(body) {
         const original = await this.getById(body.id)
-        if(original.creatorId.toString() != body.creatorId) {
-            throw new Forbidden('You do not have permission to edit this.')
-        }
+        // if(original.creatorId.toString() != body.creatorId) {
+        //     throw new Forbidden('You do not have permission to edit this.')
+        // }
         if(original.isCanceled == true) {
             throw new BadRequest('This event is no longer available')
         }
@@ -46,12 +46,12 @@ class TowerEventsService {
         await original.save()
         return original
     }
-    async capacityChange(body) {
-        const original = await this.getById(body.id)
-        original.capacity = body.capacity || original.capacity
-        await original.save()
-        return original
-    }
+    // async capacityChange(body) {
+    //     const original = await this.getById(body.id)
+    //     original.capacity = body.capacity || original.capacity
+    //     await original.save()
+    //     return original
+    // }
    async remove(eventId, userId) {
         const removedEvent = await this.getById(eventId)
         if(removedEvent.creatorId.toString() !== userId) {
