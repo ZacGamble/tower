@@ -134,13 +134,13 @@ export default {
         Pop.toast(error.message, 'error')
       }
 
-    }),
+    })
 
-      watchEffect(async () => {
-        await towerEventsService.getActiveEvent(route.params.eventId)
-        await towerEventsService.getCommentsByEvent(route.params.eventId)
-        await towerEventsService.getTicketsByEvent(route.params.eventId)
-      })
+    // watchEffect(async () => {
+    //   await towerEventsService.getActiveEvent(route.params.eventId)
+    //   await towerEventsService.getCommentsByEvent(route.params.eventId)
+    //   await towerEventsService.getTicketsByEvent(route.params.eventId)
+    // })
 
     return {
 

@@ -1,10 +1,13 @@
 <template>
   <nav class="navbar navbar-expand-lg navbar-dark bg-secondary px-3">
-    <div @click="navigateTo()" class="navbar-brand d-flex selectable">
-      <div class="d-flex align-items-center fs-1">
-        T<i class="mdi mdi-bird"></i>wer
+    <router-link :to="{ name: 'Home' }">
+      <div class="navbar-brand d-flex selectable">
+        <!-- @click="navigateTo()" -->
+        <div class="d-flex align-items-center fs-1">
+          T<i class="mdi mdi-bird"></i>wer
+        </div>
       </div>
-    </div>
+    </router-link>
     <button
       class="btn btn-primary mx-5 my-3"
       data-bs-toggle="modal"
@@ -130,7 +133,7 @@
 
 <script>
 import { ref } from '@vue/reactivity';
-import { useRouter } from 'vue-router';
+import { useRoute, useRouter } from 'vue-router';
 import { towerEventsService } from '../services/TowerEventsService';
 import { logger } from '../utils/Logger';
 import Pop from '../utils/Pop';
@@ -146,15 +149,10 @@ export default {
     return {
       editable,
 
-      async navigateTo() {
-        try {
-          router.push({ name: 'Home' })
-          await towerEventsService.getTowerEvents()
-        } catch (error) {
-          logger.error(error)
-          Pop.toast(error.message, 'error')
-        }
-      },
+      // async navigateTo() {
+      //   router.push({ name: 'Home' })
+      //   await towerEventsService.getTowerEvents()
+      // },
 
       async createTowerEvent() {
         try {

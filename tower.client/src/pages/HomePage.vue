@@ -37,16 +37,7 @@ export default {
       filteredTowerEvents.value = list
     })
 
-    watchEffect(async () => {
-      try {
-        await towerEventsService.getTowerEvents()
-      } catch (error) {
-        logger.error(error)
-        Pop.toast(error.message, 'error')
-      }
-    })
-
-    // onMounted(async()=>{
+    // watchEffect(async () => {
     //   try {
     //     await towerEventsService.getTowerEvents()
     //   } catch (error) {
@@ -54,6 +45,15 @@ export default {
     //     Pop.toast(error.message, 'error')
     //   }
     // })
+
+    onMounted(async () => {
+      try {
+        await towerEventsService.getTowerEvents()
+      } catch (error) {
+        logger.error(error)
+        Pop.toast(error.message, 'error')
+      }
+    })
 
     return {
       // return computed
