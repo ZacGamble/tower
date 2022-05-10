@@ -32,7 +32,7 @@
       <div class="col-md-8 p-4">
         <div class="d-flex justify-content-between">
           <h4>{{ activeEvent?.name }}</h4>
-          <h6>On {{ activeEvent?.startDate.substring(5, 10) }}</h6>
+          <p class="fs-6 fw-bold">On {{ activeEvent?.startDate.substring(5, 10) }}</p>
         </div>
         <div class="d-flex justify-content-between">
           <h6>{{ activeEvent?.location }}</h6>
