@@ -1,12 +1,12 @@
 import mongoose from "mongoose";
-import { TowerEventSchema } from "./TowerEvent";
+import { TowerSchema } from "./TowerEvent";
 
 const Schema = mongoose.Schema
 
 export const TicketSchema = new Schema(
     {
         // id: { type: String, required: true },
-        eventId: { type: Schema.Types.ObjectId, ref: 'TowerEvents', required: true},
+        eventId: { type: Schema.Types.ObjectId, ref: 'Tower', required: true},
         accountId: { type: Schema.Types.ObjectId, ref: 'Account', required: true },
 
     },
@@ -24,7 +24,7 @@ TicketSchema.virtual('account', {
 TicketSchema.virtual('event', {
     localField: 'eventId',
     foreignField: '_id',
-    ref: 'TowerEvents',
+    ref: 'Tower',
     justOne: true
 })
 

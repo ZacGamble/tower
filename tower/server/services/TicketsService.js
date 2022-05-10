@@ -5,7 +5,7 @@ class TicketsService {
 
   async create(body) {
       
-        const changedEvent = await dbContext.TowerEvents.findById(body.eventId)
+        const changedEvent = await dbContext.Tower.findById(body.eventId)
         if (changedEvent.capacity <= 0) {
           throw new BadRequest('This event is sold out!')
         }
@@ -22,7 +22,7 @@ class TicketsService {
         throw new BadRequest('You do not own this')
       }
         const removed = await dbContext.Tickets.findByIdAndDelete(ticketId)
-        const event = await dbContext.TowerEvents.findById(removed.eventId)
+        const event = await dbContext.Tower.findById(removed.eventId)
         event.capacity++
         await event.save()
         return removed

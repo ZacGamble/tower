@@ -68,8 +68,11 @@ export default {
 
 <style>
 .background {
-  background-image: url(https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSsabwBkqqKoScQIEGo5S1CzUm3GxJS4XRIiA&usqp=CAU);
+  background-image: url(https://wallpapercave.com/wp/v5R405z.jpg);
   background-size: cover;
+  background-position-y: -1em;
+  min-height: 20vh;
+  margin-top: 2em;
 }
 
 .pop:hover {

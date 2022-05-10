@@ -10,7 +10,8 @@ class TicketsService {
             throw new Error('You already have a ticket for that event')
         }
         const res = await api.post('api/tickets', {eventId})
-        AppState.myTickets = [...AppState.myTickets, res.data]       
+        AppState.myTickets = [...AppState.myTickets, res.data]    
+        logger.log('newly created ticket', res.data)   
     }
 
     async destroyTicket(ticketId){            

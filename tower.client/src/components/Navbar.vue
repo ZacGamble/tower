@@ -1,7 +1,7 @@
 <template>
   <nav class="navbar navbar-expand-lg navbar-dark bg-secondary px-3">
     <router-link :to="{ name: 'Home' }">
-      <div class="navbar-brand d-flex selectable">
+      <div class="navbar-brand d-flex selectable" title="back to homepage">
         <!-- @click="navigateTo()" -->
         <div class="d-flex align-items-center fs-1">
           T<i class="mdi mdi-bird"></i>wer
@@ -70,6 +70,8 @@
                 type="text"
                 placeholder="name..."
                 v-model="editable.name"
+                minlength="2"
+                required
               />
               <input
                 class="m-2 p-2 rounded"
@@ -84,24 +86,29 @@
                 type="text"
                 placeholder="location..."
                 v-model="editable.location"
+                required
+                minlength="3"
               />
               <input
                 class="m-2 p-2 rounded"
                 type="number"
                 placeholder="capacity"
                 v-model="editable.capacity"
+                required
+                min="2"
               />
             </div>
             <div class="d-flex flex-column">
-              <div class="d-flex">
+              <div class="d-flex justify-content-evenly align-items-center">
                 <input
-                  class="m-2 p-2 rounded"
+                  class="m-2 p-2 rounded border border-dark"
                   type="date"
                   v-model="editable.startDate"
+                  required
                 />
-                <select name="type" id="type-select" v-model="editable.type">
-                  <option value="concert" selected>Concert</option>
-                  <option value="convention">Convention</option>
+                <select class="border border-dark" name="type" id="type-select" v-model="editable.type">
+                  <option value="concert" >Concert</option>
+                  <option value="convention" selected>Convention</option>
                   <option value="sport">Sport</option>
                   <option value="digital">Digital</option>
                 </select>

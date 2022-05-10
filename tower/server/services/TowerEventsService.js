@@ -5,10 +5,10 @@ class TowerEventsService {
  
 
    async getAll() {
-        return await dbContext.TowerEvents.find().populate('creator');
+        return await dbContext.Tower.find().populate('creator');
     }
    async getById(id) {
-        const found = await dbContext.TowerEvents.findById(id).populate('creator');
+        const found = await dbContext.Tower.findById(id).populate('creator');
         if(!found){
             throw new BadRequest('Could not find event with that id')
         }
@@ -22,7 +22,7 @@ class TowerEventsService {
         return await dbContext.Comments.find({eventId}).populate('creator')
     }
    async create(body) {
-        const created = await dbContext.TowerEvents.create(body)
+        const created = await dbContext.Tower.create(body)
         await created.populate('creator');
         return created;
     }

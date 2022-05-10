@@ -5,7 +5,7 @@
         class="img-fluid img-clamp"
         :src="ticket?.event.coverImg"
         alt="event picture"
-        :title="ticket.event.name"
+        :title="ticket?.event.name"
       />
       <div class="ms-2">
         <h5>
