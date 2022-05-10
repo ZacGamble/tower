@@ -1,17 +1,5 @@
 <template>
-  <div class="row mt-3">
-    <div
-      class="
-        d-flex
-        justify-content-evenly
-        bg-secondary
-        fs-4
-        fw-bold
-        align-items-center
-        pt-2
-        rounded
-      "
-    >
+  <div class="row mt-3 bg-light text-dark fs-4 fw-bold d-flex justify-content-center">
       <div class="col-md-2 text-center">
         <p class="selectable pop" title="view all" @click="getTowerEvents()">
           All Events
@@ -54,7 +42,6 @@
         </p>
       </div>
     </div>
-  </div>
 </template>
 
 
