@@ -32,7 +32,9 @@
       <div class="col-md-8 p-4">
         <div class="d-flex justify-content-between">
           <h4>{{ activeEvent?.name }}</h4>
-          <p class="fs-6 fw-bold">On {{ activeEvent?.startDate.substring(5, 10) }}</p>
+          <p class="fs-6 fw-bold">
+            On {{ activeEvent?.startDate.substring(5, 10) }}
+          </p>
         </div>
         <div class="d-flex justify-content-between">
           <h6>{{ activeEvent?.location }}</h6>
@@ -122,8 +124,8 @@ export default {
 
     const route = useRoute()
     const comment = ref({ eventId: route.params.eventId })
-
-    onMounted(async () => {
+    // TODO always use a watcheffect if using parameters to get data
+    watchEffect(async () => {
       try {
         // logger.log(route.params.eventId)
         // AppState.activeEvent = null;
@@ -132,7 +134,7 @@ export default {
         await towerEventsService.getTicketsByEvent(route.params.eventId)
       } catch (error) {
         logger.error(error)
-        Pop.toast(error.message, 'error')
+        // Pop.toast(error.message, 'error')
       }
 
     })
@@ -151,6 +153,7 @@ export default {
       activeTickets: computed(() => AppState.activeTickets),
       myTicketsForEvent: computed(() => AppState.activeTickets.find(t => t.eventId == AppState.activeEvent.id)),
       account: computed(() => AppState.account),
+      //  TODO try and grab a ticket from your Appstate using your account id. If that ticket exists, do not show the button on your page
 
       async createTicket() {
         try {

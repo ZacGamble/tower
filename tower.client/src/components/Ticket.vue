@@ -1,5 +1,7 @@
 <template>
-  <div class="d-flex justify-content-between me-5 col-md-3 p-3 rounded">
+  <div
+    class="d-flex justify-content-between me-5 col-md-3 col-sm-6 p-3 rounded"
+  >
     <div class="bg-grey rounded p-3">
       <img
         class="img-fluid img-clamp"

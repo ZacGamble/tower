@@ -1,5 +1,5 @@
 <template>
-  <div class="col-md-3 col-sm-6 my-3 p-3">
+  <div class="col-md-3 col-sm-6 my-3 p-3 bg-dark">
     <div
       @click.stop="
         openEventPage('EventDetailsPage', { eventId: towerEvent.id })
