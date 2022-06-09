@@ -127,23 +127,16 @@ export default {
     // TODO always use a watcheffect if using parameters to get data
     watchEffect(async () => {
       try {
-        // logger.log(route.params.eventId)
-        // AppState.activeEvent = null;
-        await towerEventsService.getActiveEvent(route.params.eventId)
-        await towerEventsService.getCommentsByEvent(route.params.eventId)
-        await towerEventsService.getTicketsByEvent(route.params.eventId)
+        if (route.params.eventId) {
+          await towerEventsService.getActiveEvent(route.params.eventId)
+          await towerEventsService.getCommentsByEvent(route.params.eventId)
+          await towerEventsService.getTicketsByEvent(route.params.eventId)
+        }
       } catch (error) {
         logger.error(error)
-        // Pop.toast(error.message, 'error')
+        Pop.toast(error.message, 'error')
       }
-
     })
-
-    // watchEffect(async () => {
-    //   await towerEventsService.getActiveEvent(route.params.eventId)
-    //   await towerEventsService.getCommentsByEvent(route.params.eventId)
-    //   await towerEventsService.getTicketsByEvent(route.params.eventId)
-    // })
 
     return {
 

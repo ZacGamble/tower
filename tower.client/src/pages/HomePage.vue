@@ -1,8 +1,8 @@
 <template>
   <div class="container">
-    <div class="row background text-light fw-bold p-3">
+    <div class="row background text-light fw-bold p-3 rounded">
       <!-- Filter homepage component here? -->
-      <p>
+      <p class="text-center mt-4">
         Get ahead of the scalpers -<br />
         Reserve your seat now with <br />
         real events for real people
@@ -37,15 +37,6 @@ export default {
       filteredTowerEvents.value = list
     })
 
-    // watchEffect(async () => {
-    //   try {
-    //     await towerEventsService.getTowerEvents()
-    //   } catch (error) {
-    //     logger.error(error)
-    //     Pop.toast(error.message, 'error')
-    //   }
-    // })
-
     onMounted(async () => {
       try {
         await towerEventsService.getTowerEvents()
@@ -59,10 +50,8 @@ export default {
       // return computed
       towerEvents: computed(() => AppState.activeEvents),
       // methods
-
     }
   }
-
 }
 </script>
 

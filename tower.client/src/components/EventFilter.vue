@@ -1,47 +1,60 @@
 <template>
-  <div class="row mt-3 p-2 bg-light text-dark fs-4 fw-bold d-flex justify-content-center">
-      <div class="col-md-2 text-center">
-        <p class="selectable pop" title="view all" @click="getTowerEvents()">
-          All Events
-        </p>
-      </div>
-      <div class="col-md-2 text-center">
-        <p
-          class="selectable pop"
-          title="filter for concerts"
-          @click="getTowerConcerts()"
-        >
-          Concerts
-        </p>
-      </div>
-      <div class="col-md-2 text-center">
-        <p
-          class="selectable pop"
-          title="filter for digital"
-          @click="getTowerDigital()"
-        >
-          Digital
-        </p>
-      </div>
-      <div class="col-md-2 text-center">
-        <p
-          class="selectable pop"
-          title="filter for sports"
-          @click="getTowerSports()"
-        >
-          Sports
-        </p>
-      </div>
-      <div class="col-md-2 text-center">
-        <p
-          class="selectable pop"
-          title="filter for conventions"
-          @click="getTowerConventions()"
-        >
-          Conventions
-        </p>
-      </div>
+  <div
+    class="
+      row
+      mt-3
+      p-2
+      bg-light
+      text-dark
+      fs-4
+      fw-bold
+      d-flex
+      justify-content-center
+      rounded
+    "
+  >
+    <div class="col-md-2 text-center">
+      <p class="selectable pop" title="view all" @click="getTowerEvents()">
+        All Events
+      </p>
     </div>
+    <div class="col-md-2 text-center">
+      <p
+        class="selectable pop"
+        title="filter for concerts"
+        @click="getTowerConcerts()"
+      >
+        Concerts
+      </p>
+    </div>
+    <div class="col-md-2 text-center">
+      <p
+        class="selectable pop"
+        title="filter for digital"
+        @click="getTowerDigital()"
+      >
+        Digital
+      </p>
+    </div>
+    <div class="col-md-2 text-center">
+      <p
+        class="selectable pop"
+        title="filter for sports"
+        @click="getTowerSports()"
+      >
+        Sports
+      </p>
+    </div>
+    <div class="col-md-2 text-center">
+      <p
+        class="selectable pop"
+        title="filter for conventions"
+        @click="getTowerConventions()"
+      >
+        Conventions
+      </p>
+    </div>
+  </div>
 </template>
 
 

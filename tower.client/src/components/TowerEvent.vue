@@ -1,10 +1,10 @@
 <template>
-  <div class="col-md-3 col-sm-6 my-3 p-3 bg-dark">
+  <div class="col-lg-3 col-md-4 col-sm-6 my-3 p-3">
     <div
       @click.stop="
         openEventPage('EventDetailsPage', { eventId: towerEvent.id })
       "
-      class="border border-dark selectable p-1 tower-event"
+      class="border border-dark selectable p-2 tower-event"
       :title="'open details for ' + towerEvent.name"
     >
       <img
@@ -77,8 +77,10 @@ export default {
 }
 
 .tower-event {
-  border-radius: 5%;
-  background-color: rgb(12, 12, 86);
+  border-radius: 3%;
+  background-color: #8392ab;
+  color: white;
+  text-shadow: 1px 4px 3px black;
 }
 </style>
 
